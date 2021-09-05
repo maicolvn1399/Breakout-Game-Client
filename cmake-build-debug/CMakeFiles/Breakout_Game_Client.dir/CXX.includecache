@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.cpp
+SocketClient.h
+/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
+
+/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
+sys/socket.h
+-
+sys/types.h
+-
+netdb.h
+-
+string.h
+-
+string
+-
+iostream
+-
+pthread.h
+-
+vector
+-
+unistd.h
+-
+arpa/inet.h
+-
+
+/home/michael/Documentos/Breakout-Game-Client/main.cpp
+iostream
+-
+SocketClient/SocketClient.h
+/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
+
