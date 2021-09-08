@@ -1,4 +1,8 @@
-/home/michael/Descargas/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/michael/Documentos/Breakout-Game-Client
+/home/maxgm/Downloads/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/maxgm/Escritorio/Datos2/Breakout-Game-Client
+-- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
+-- SFML_INCLUDE_DIR: /home/rewieer/Libraries/SFML-2.5.1/include
+-- SFML_LIBRARIES: 
+-- SFML_VERSION: 2.5.1
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/michael/Documentos/Breakout-Game-Client/cmake-build-debug
+-- Build files have been written to: /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug

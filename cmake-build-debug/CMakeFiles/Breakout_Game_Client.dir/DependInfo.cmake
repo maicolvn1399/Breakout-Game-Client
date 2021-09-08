@@ -8,13 +8,19 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/SocketClient/SocketClient.cpp.o"
-  "/home/michael/Documentos/Breakout-Game-Client/main.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/main.cpp.o"
+  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Ball.cpp.o"
+  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/BarPlayer.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/BarPlayer.cpp.o"
+  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Game.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Game.cpp.o"
+  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/main.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/main.cpp.o"
+  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/SocketClient/SocketClient.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/SocketClient/SocketClient.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "."
+  "../"
+  "../SFML_INCLUDE_DIR"
   )
 
 # The set of dependency files which are needed:

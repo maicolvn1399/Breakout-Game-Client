@@ -6,35 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.cpp
-SocketClient.h
-/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
+/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.cpp
+Ball.h
+/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.h
 
-/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
-sys/socket.h
+/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.h
+SFML/Graphics.hpp
 -
-sys/types.h
+SFML/System.hpp
 -
-netdb.h
+SFML/Window.hpp
 -
-string.h
+SFML/Audio.hpp
 -
-string
+SFML/Network.hpp
 -
-iostream
--
-pthread.h
--
-vector
--
-unistd.h
--
-arpa/inet.h
--
-
-/home/michael/Documentos/Breakout-Game-Client/main.cpp
-iostream
--
-SocketClient/SocketClient.h
-/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.h
 

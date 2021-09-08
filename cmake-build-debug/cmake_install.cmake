@@ -1,4 +1,4 @@
-# Install script for directory: /home/michael/Documentos/Breakout-Game-Client
+# Install script for directory: /home/maxgm/Escritorio/Datos2/Breakout-Game-Client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
