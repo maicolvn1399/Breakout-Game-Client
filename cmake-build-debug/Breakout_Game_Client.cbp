@@ -106,6 +106,12 @@
 		<Unit filename="/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Game.h">
 			<Option target="Breakout_Game_Client"/>
 		</Unit>
+		<Unit filename="/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/ListaSimple.h">
+			<Option target="Breakout_Game_Client"/>
+		</Unit>
+		<Unit filename="/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Nodo.h">
+			<Option target="Breakout_Game_Client"/>
+		</Unit>
 		<Unit filename="/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/main.cpp">
 			<Option target="Breakout_Game_Client"/>
 		</Unit>

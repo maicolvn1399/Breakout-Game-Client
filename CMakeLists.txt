@@ -19,6 +19,6 @@ if(SFML_FOUND)
     message(STATUS "SFML_VERSION: ${SFML_VERSION}")
 endif()
 
-add_executable(Breakout_Game_Client Game_GUI/main.cpp SocketClient/SocketClient.cpp SocketClient/SocketClient.h Game_GUI/Ball.cpp Game_GUI/Ball.h Game_GUI/BarPlayer.cpp Game_GUI/BarPlayer.h Game_GUI/Game.cpp Game_GUI/Game.h)
+add_executable(Breakout_Game_Client Game_GUI/main.cpp SocketClient/SocketClient.cpp SocketClient/SocketClient.h Game_GUI/Ball.cpp Game_GUI/Ball.h Game_GUI/BarPlayer.cpp Game_GUI/BarPlayer.h Game_GUI/Game.cpp Game_GUI/Game.h Game_GUI/ListaSimple.h Game_GUI/Nodo.h)
 
 target_link_libraries (Breakout_Game_Client sfml-graphics sfml-window sfml-system)
