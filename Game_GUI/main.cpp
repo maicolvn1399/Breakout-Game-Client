@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "SocketClient/SocketClient.h"
+#include "ListaSimple.h"
 #include <iostream>
 #include "Game.h"
 #include <SFML/Graphics.hpp>

@@ -11,8 +11,9 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <vector>
-#include "../../../Escritorio/Datos2/Breakout-Game-Client/Game_GUI/BarPlayer.h"
-#include "../../../Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.h"
+#include "Game_GUI/BarPlayer.h"
+#include "Game_GUI/Ball.h"
+#include "ListaSimple.h"
 
 //Class that acts as the game engine wrapper class
 
@@ -26,9 +27,8 @@ private:
 
     //Game objects
     BarPlayer barPlayer;
-    Ball balls;
+    ListaSimple<Ball> balls;
 
-    //std::vector<Ball> balls;
     float spawnTimerMax;
     float spawnTimer;
     int maxBalls;

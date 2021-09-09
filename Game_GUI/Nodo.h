@@ -11,16 +11,16 @@
  *
  * @tparam DATO, type of the node
  */
-template<class DATA>
+template<class DATO>
 class Nodo {
 public:
-    DATA dato;
-    Nodo<DATA> * next;
+    DATO dato;
+    Nodo<DATO> * next;
 
 
     // Constructores
     Nodo(){
-        data;
+        dato;
         next = NULL;
     }
 
