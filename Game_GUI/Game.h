@@ -26,8 +26,9 @@ private:
 
     //Game objects
     BarPlayer barPlayer;
+    Ball balls;
 
-    std::vector<Ball> balls;
+    //std::vector<Ball> balls;
     float spawnTimerMax;
     float spawnTimer;
     int maxBalls;

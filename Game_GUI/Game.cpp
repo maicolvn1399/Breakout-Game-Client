@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Game.h"
+#include "Ball.h"
 #include "../../../Escritorio/Datos2/Breakout-Game-Client/Game_GUI/BarPlayer.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -59,16 +60,16 @@ void Game::pollEvents() { //getIsOpen
 
 void Game::spawnBalls() {
     //timer
-    if(this->spawnTimer < this->spawnTimerMax)
-        this->spawnTimer += 1.f;
-    else{
-        if(this->balls.size() < this->maxBalls){
-            this->balls.push_back(Ball(*this->window));
+    //if(this->spawnTimer < this->spawnTimerMax)
+        //this->spawnTimer += 1.f;
+    //else{
+        //if(this->balls.size() < this->maxBalls){
+            //this->balls.push_back(Ball(*this->window));
 
-            this->spawnTimer = 0.f;
-        }
+            //this->spawnTimer = 0.f;
+        //}
 
-    }
+    //}
 
 }
 
@@ -77,6 +78,7 @@ void Game::update() {
 
     this->spawnBalls();
     this->barPlayer.update(this->window);
+    this->balls.update(this->window);
 
 }
 
@@ -94,10 +96,7 @@ void Game::render() {
     //Render stuff
     this->barPlayer.render(this->window);
 
-    for (auto i: this->balls) {
-        i.render(*this->window);
-
-    }
+    this->balls.render(this->window);
 
     //Draw game objects
     this->window->display();

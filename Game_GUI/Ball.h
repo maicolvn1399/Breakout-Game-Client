@@ -20,17 +20,16 @@ private:
     float ballsMovementSpeedY;
 
     void initVariables();
-    void initShape(const sf::RenderWindow& window);
+    void initShape();
 
 public:
-    Ball(const sf::RenderWindow& window);
+    Ball(float x = 0.f, float y = 700.f);
     virtual ~Ball();
 
-    //Functions
-    void collision();
-    void updateInput();
-    void update();
-    void render(sf::RenderTarget& target);
+    void updateWindowBoundsCollision(const sf::RenderTarget* target);
+    void updateObjectCollision(const sf::RenderTarget* target);
+    void update(sf::RenderTarget* target);
+    void render(sf::RenderTarget* target);
 
 };
 

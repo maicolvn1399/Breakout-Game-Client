@@ -26,8 +26,10 @@ public:
     BarPlayer(float x = 0.f, float y = 725.f); //Initial player position
     virtual ~BarPlayer();
 
+    //Functions
     void updateInput();
     void updateWindowBoundsCollision(const sf::RenderTarget* target);
+    void updateObjectCollision(const sf::RenderTarget* target);
     void update(const sf::RenderTarget* target);
     void render(sf::RenderTarget* target);
 };
