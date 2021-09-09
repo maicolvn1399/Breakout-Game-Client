@@ -16,7 +16,10 @@ class BarPlayer {
 private:
     sf::RectangleShape shape;
 
+
     float movementSpeed;
+    int hp;
+    int hpMax;
 
     void initVariables();
     void initShape();
@@ -25,6 +28,8 @@ private:
 public:
     BarPlayer(float x = 0.f, float y = 725.f); //Initial player position
     virtual ~BarPlayer();
+
+    const sf::RectangleShape& getShape() const;
 
     //Functions
     void updateInput();

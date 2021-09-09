@@ -27,7 +27,8 @@ private:
 
     //Game objects
     BarPlayer barPlayer;
-    ListaSimple<Ball> balls;
+    //ListaSimple<Ball> balls;
+    std::vector<Ball> balls;
 
     float spawnTimerMax;
     float spawnTimer;
@@ -50,6 +51,8 @@ public:
     //Functions
     void pollEvents();
     void spawnBalls();
+    void updateCollision();
+    void checkCollision();
     void update();
     void render();
 

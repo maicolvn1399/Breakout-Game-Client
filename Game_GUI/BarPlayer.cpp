@@ -7,6 +7,8 @@
 void BarPlayer::initVariables() {
 
     this->movementSpeed = 10.f;
+    this->hpMax = 5;
+    this->hp = hpMax;
 
 }
 
@@ -30,6 +32,10 @@ BarPlayer::BarPlayer(float x, float y) {
 
 BarPlayer::~BarPlayer() {
 
+}
+
+const sf::RectangleShape & BarPlayer::getShape() const {
+    return this->shape;
 }
 
 void BarPlayer::updateInput() {
@@ -75,6 +81,8 @@ void BarPlayer::render(sf::RenderTarget *target) {
     target->draw(this->shape);
 
 }
+
+
 
 
 
