@@ -18,6 +18,7 @@ void Game::initializeVariables() {
     this->spawnTimerMax = 600; //8,36 seconds
     this->spawnTimer = this->spawnTimerMax;
     this->maxBalls = 5;
+    this->ballsMS = 5.f;
 
 }
 
@@ -85,6 +86,10 @@ void Game::updateCollision() { //Check if there is a collision between the ball 
 
 }
 void Game::checkCollision() {
+    for (size_t i = 0; i < balls.size(); i++) {
+        balls[i].moveBall();
+    }
+
 
 
 }
@@ -95,6 +100,7 @@ void Game::update() {
     this->spawnBalls();
     this->barPlayer.update(this->window);
     this->updateCollision();
+    //this->checkCollision();
 
 }
 

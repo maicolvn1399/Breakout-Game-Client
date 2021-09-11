@@ -11,6 +11,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <vector>
+#include <time.h>
 #include "Game_GUI/BarPlayer.h"
 #include "Game_GUI/Ball.h"
 #include "ListaSimple.h"
@@ -29,6 +30,7 @@ private:
     BarPlayer barPlayer;
     //ListaSimple<Ball> balls;
     std::vector<Ball> balls;
+    float ballsMS;
 
     float spawnTimerMax;
     float spawnTimer;

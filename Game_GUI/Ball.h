@@ -21,15 +21,17 @@ private:
 
     void initVariables();
     void initShape(const sf::RenderWindow& window);
+    float speed;
 
 public:
     Ball(const sf::RenderWindow& window);
     virtual ~Ball();
 
     const sf::CircleShape & getShape() const;
-    void updateWindowBoundsCollision(sf::RenderTarget& target);
+    void updateWindowBoundsCollision(sf::RenderTarget& target); //se usa & para pasar el objeto por referencia(direccion de memoria), no por valor.
     void updateObjectCollision(sf::RenderTarget& target);
     void update(sf::RenderTarget& target);
+    void moveBall();
     void render(sf::RenderTarget& target);
 
 };

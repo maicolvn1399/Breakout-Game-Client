@@ -2,11 +2,12 @@
 // Created by maxgm on 4/9/21.
 //
 
+#include <iostream>
 #include "Ball.h"
 
 void Ball::initVariables() {
 
-    ballsMovementSpeedY = 10.f;
+    ballsMovementSpeedY = 40.f;
     ballsMovementSpeedX = 10.f;
     //sf::Vector2f ballSpeed(-ballsMovementSpeedX, -ballsMovementSpeedY);
 
@@ -55,18 +56,22 @@ void Ball::updateWindowBoundsCollision(sf::RenderTarget &target) {
 
 void Ball::update(sf::RenderTarget& target) {
 
-    this->circleShape.move(ballsMovementSpeedX, ballsMovementSpeedY);
-
 
     //Window bounds collision
     this->updateWindowBoundsCollision(target);
 
 }
 
+void Ball::moveBall() {
+    circleShape.move(0.f, -this->ballsMovementSpeedY);
+}
+
 void Ball::render(sf::RenderTarget &target) {
     target.draw(this->circleShape);
 
 }
+
+
 
 
 
