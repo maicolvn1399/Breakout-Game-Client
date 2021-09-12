@@ -95,6 +95,11 @@ void Game::checkCollision() {
 }
 
 void Game::update() {
+    /**
+     *
+     * -Called on main.cpp
+     * -Keeps the methods in the mainloop.
+     */
     this->pollEvents();
 
     this->spawnBalls();

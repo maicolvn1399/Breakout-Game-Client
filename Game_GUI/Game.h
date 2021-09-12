@@ -29,7 +29,7 @@ private:
     //Game objects
     BarPlayer barPlayer;
     //ListaSimple<Ball> balls;
-    std::vector<Ball> balls;
+    std::vector<Ball> balls; //Ball Class is store on a vector named balls
     float ballsMS;
 
     float spawnTimerMax;
