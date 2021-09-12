@@ -100,7 +100,9 @@ void Game::update() {
     this->spawnBalls();
     this->barPlayer.update(this->window);
     this->updateCollision();
-    //this->checkCollision();
+    for(auto i : this->balls){
+        i.update(*this->window);
+    }
 
 }
 

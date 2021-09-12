@@ -59,11 +59,12 @@ void Ball::update(sf::RenderTarget& target) {
 
     //Window bounds collision
     this->updateWindowBoundsCollision(target); //Verificar colisiones con los bordes de la pantalla.
+    this->moveBall();
 
 }
 
 void Ball::moveBall() {
-    circleShape.move(0.f, -this->ballsMovementSpeedY);
+    circleShape.move(this->ballsMovementSpeedX, -this->ballsMovementSpeedY);
 }
 
 void Ball::render(sf::RenderTarget &target) {
