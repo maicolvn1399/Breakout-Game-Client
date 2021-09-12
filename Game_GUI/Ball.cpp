@@ -58,7 +58,7 @@ void Ball::update(sf::RenderTarget& target) {
 
 
     //Window bounds collision
-    this->updateWindowBoundsCollision(target);
+    this->updateWindowBoundsCollision(target); //Verificar colisiones con los bordes de la pantalla.
 
 }
 
