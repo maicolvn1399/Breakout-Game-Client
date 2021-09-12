@@ -90,8 +90,6 @@ void Game::checkCollision() {
         balls[i].moveBall();
     }
 
-
-
 }
 
 void Game::update() {

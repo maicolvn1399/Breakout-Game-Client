@@ -14,6 +14,10 @@
 class Ball {
 private:
     sf::CircleShape circleShape;
+    sf::Clock clock;
+    sf::Time time;
+    sf::Time flag;
+    sf::Time juanSecond;
 
     float ballsMovementSpeedX;
 
@@ -22,6 +26,7 @@ private:
     void initVariables();
     void initShape(const sf::RenderWindow& window);
     float speed;
+    int movTimer;
 
 public:
     Ball(const sf::RenderWindow& window);

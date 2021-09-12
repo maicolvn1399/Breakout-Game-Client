@@ -5,10 +5,15 @@
 #include <iostream>
 #include "Ball.h"
 
+
 void Ball::initVariables() {
 
-    ballsMovementSpeedY = 40.f;
-    ballsMovementSpeedX = 10.f;
+    ballsMovementSpeedY = 5.f;
+    ballsMovementSpeedX = 5.f;
+    this->movTimer = 600;
+    time = sf::seconds(30);
+    flag = sf::seconds(0);
+    juanSecond = sf::seconds(1);
     //sf::Vector2f ballSpeed(-ballsMovementSpeedX, -ballsMovementSpeedY);
 
 }
@@ -64,7 +69,13 @@ void Ball::update(sf::RenderTarget& target) {
 }
 
 void Ball::moveBall() {
-    circleShape.move(this->ballsMovementSpeedX, -this->ballsMovementSpeedY);
+    while(time > flag){
+        circleShape.move(0.f, -this->ballsMovementSpeedY);
+        time -= juanSecond;
+    }
+
+
+
 }
 
 void Ball::render(sf::RenderTarget &target) {
