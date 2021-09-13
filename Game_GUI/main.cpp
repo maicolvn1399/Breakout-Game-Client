@@ -42,6 +42,10 @@ int main(){
 
     //delete client;
 
+
+    //init srand
+    srand(static_cast<unsigned>(time(NULL)));
+
     //Init game engine
     Game game;
 

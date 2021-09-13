@@ -20,11 +20,16 @@ void Game::initializeVariables() {
     this->maxBalls = 5;
     this->ballsMS = 5.f;
 
+
+    this->movingBallsSpawnTimerMax = 10.f;
+    this->movingBallsSpawnTimer = this->movingBallsSpawnTimerMax;
+    this->maxMovingBalls = 3;
+
 }
 
 void Game::initWindow() {
-    this->videoMode.height = 800;
-    this->videoMode.width = 1000;
+    this->videoMode.height = 500;
+    this->videoMode.width = 800;
     this->window = new sf::RenderWindow(this->videoMode, "Breakout", sf::Style::Titlebar | sf::Style::Close); //Ventana que tiene un tamana de 800x600, titulo Breakout, que tiene boton de cierre y puede ser expandida
     this->window->setFramerateLimit(60);
 }
@@ -33,6 +38,7 @@ void Game::initWindow() {
 Game::Game() {
     this->initializeVariables();
     this->initWindow();
+    this->initBalls();
 
 }
 
@@ -82,8 +88,6 @@ void Game::updateCollision() { //Check if there is a collision between the ball 
             this->checkCollision();
         }
     }
-
-
 }
 void Game::checkCollision() {
     for (size_t i = 0; i < balls.size(); i++) {
@@ -107,6 +111,8 @@ void Game::update() {
         i.update(*this->window);
     }
 
+    this->updateMovingBalls();
+
 }
 
 void Game::render() {
@@ -128,7 +134,85 @@ void Game::render() {
     }
 
     //Draw game objects
+
+    this->renderMovingBalls();
+
     this->window->display();
+
+}
+
+void Game::initBalls() {
+    this->ball.setPosition(10.f,10.f);
+    this->ball.setRadius(20.f);
+    this->ball.setFillColor(Color::Cyan);
+    this->ball.setOutlineColor(Color::Black);
+    this->ball.setOutlineThickness(1.f);
+
+}
+
+void Game::spawnMovingBalls() {
+
+    /**
+     * spawn moving balls and set their colors and positions
+     * sets a random position
+     * sets a random color
+     */
+
+    this->ball.setPosition(
+            static_cast<float>(rand() % static_cast<int>(this->window->getSize().x - this->ball.getRadius())),
+            0.f
+            );
+
+    this->ball.setFillColor(Color::Red);
+    //Spawn ball
+    this->movingBalls.push_back(this->ball);
+}
+
+void Game::updateMovingBalls() {
+
+    /**
+     * update the moving ball spawn timer and spawn balls
+     * when the total amount of ball is smaller than the max
+     * moves the balls
+     */
+
+    //Updating the timer for moving balls spawning
+    if(this->movingBalls.size() < this->maxMovingBalls){
+        if(this->movingBallsSpawnTimer>=this->movingBallsSpawnTimerMax){
+            //Spawn the ball and set the timer
+            this->spawnMovingBalls();
+            this->movingBallsSpawnTimer = 0.f;
+        }
+        else
+            this->movingBallsSpawnTimer += 1.f;
+    }
+
+    //Moving balls
+
+    float xstep = 2.f;
+    float ystep = 2.f;
+
+    for(auto &e : this->movingBalls) {
+        e.move(xstep, ystep);
+        if(e.getPosition().x >760){
+            xstep = -2.f;
+        }else if(e.getPosition().x < 0){
+            xstep = 2.f;
+        }
+
+        if(e.getPosition().y > 480){
+            ystep = -2.f;
+        }else if(e.getPosition().y < 0){
+            ystep = 2.f;
+        }
+    }
+}
+
+void Game::renderMovingBalls() {
+    //Rendering balls
+    for(auto &e : this->movingBalls){
+        this->window->draw(e);
+    }
 
 }
 

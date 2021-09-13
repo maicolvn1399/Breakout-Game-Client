@@ -43,11 +43,9 @@ void BarPlayer::updateInput() {
     //Left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         this->shape.move(-this->movementSpeed, 0.f);
-
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
         this->shape.move(this->movementSpeed, 0.f);
-
     }
 }
 

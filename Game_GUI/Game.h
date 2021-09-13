@@ -11,10 +11,13 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <vector>
+#include <ctime>
 #include <time.h>
 #include "Game_GUI/BarPlayer.h"
 #include "Game_GUI/Ball.h"
 #include "ListaSimple.h"
+using namespace sf;
+using namespace std;
 
 //Class that acts as the game engine wrapper class
 
@@ -37,9 +40,22 @@ private:
     int maxBalls;
 
 
+
+    float movingBallsSpawnTimer;
+    float movingBallsSpawnTimerMax;
+    int maxMovingBalls;
+
+
+    vector<CircleShape> movingBalls;
+    CircleShape ball;
+
+
+
+
     //Private functions
     void initializeVariables();
     void initWindow();
+    void initBalls();
 
 public:
     //Constructos / Destructors
@@ -53,6 +69,9 @@ public:
     //Functions
     void pollEvents();
     void spawnBalls();
+    void spawnMovingBalls();
+    void updateMovingBalls();
+    void renderMovingBalls();
     void updateCollision();
     void checkCollision();
     void update();
