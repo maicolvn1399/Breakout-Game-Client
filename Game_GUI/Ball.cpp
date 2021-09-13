@@ -8,12 +8,6 @@
 
 void Ball::initVariables() {
 
-    ballsMovementSpeedY = 5.f;
-    ballsMovementSpeedX = 5.f;
-    this->movTimer = 600;
-    time = sf::seconds(30);
-    flag = sf::seconds(0);
-    juanSecond = sf::seconds(1);
     //sf::Vector2f ballSpeed(-ballsMovementSpeedX, -ballsMovementSpeedY);
 
 }
@@ -59,27 +53,16 @@ void Ball::updateWindowBoundsCollision(sf::RenderTarget &target) {
 }
 
 
-void Ball::update(sf::RenderTarget& target) {
-    //Window bounds collision
-    this->updateWindowBoundsCollision(target); //Verificar colisiones con los bordes de la pantalla.
-    this->moveBall();
-
+void Ball::updateBall() {
+    circleShape.move(ballSpeed.x*updateTime,ballSpeed.y*updateTime);
 }
 
-void Ball::moveBall() {
-    while(time > flag){
-        circleShape.move(0.f, -this->ballsMovementSpeedY);
-        time -= juanSecond;
-    }
-
-
-
-}
 
 void Ball::render(sf::RenderTarget &target) {
     target.draw(this->circleShape);
 
 }
+
 
 
 

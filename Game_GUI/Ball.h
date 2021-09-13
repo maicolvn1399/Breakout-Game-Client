@@ -10,23 +10,22 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <math.h>
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+using namespace sf;
 
 class Ball {
 private:
-    sf::CircleShape circleShape;
-    sf::Clock clock;
-    sf::Time time;
-    sf::Time flag;
-    sf::Time juanSecond;
+    CircleShape circleShape;
+    Time time;
+    Int32 updateTime;
 
-    float ballsMovementSpeedX;
-
-    float ballsMovementSpeedY;
+    Vector2f ballSpeed;
 
     void initVariables();
     void initShape(const sf::RenderWindow& window);
-    float speed;
-    int movTimer;
 
 public:
     Ball(const sf::RenderWindow& window);
@@ -34,9 +33,7 @@ public:
 
     const sf::CircleShape & getShape() const;
     void updateWindowBoundsCollision(sf::RenderTarget& target); //se usa & para pasar el objeto por referencia(direccion de memoria), no por valor.
-    void updateObjectCollision(sf::RenderTarget& target);
-    void update(sf::RenderTarget& target);
-    void moveBall();
+    void updateBall();
     void render(sf::RenderTarget& target);
 
 };
