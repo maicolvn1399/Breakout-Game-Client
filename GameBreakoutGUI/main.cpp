@@ -1,14 +1,15 @@
 #include <iostream>
 
 #include "SocketClient/SocketClient.h"
-#include "ListaSimple.h"
+#include "Game_GUI/ListaSimple.h"
 #include <iostream>
-#include "Game.h"
+#include "Game_GUI/Game.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "GameBreakoutGUI/GameBO.h"
 
 
 SocketClient* client;
@@ -47,18 +48,18 @@ int main(){
     srand(static_cast<unsigned>(time(NULL)));
 
     //Init game engine
-    Game game;
+    //Game game;
 
 
     //Game loop
-    while (game.running()){
+    //while (game.running()){
 
 
         //Update
-        game.update();
+        //game.update();
 
         //Render
-        game.render();
+        //game.render();
 
 
     }

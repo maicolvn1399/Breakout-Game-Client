@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Game.h"
-#include "Ball.h"
+#include "GameBreakoutGUI/Ball.h"
 #include "BarPlayer.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>

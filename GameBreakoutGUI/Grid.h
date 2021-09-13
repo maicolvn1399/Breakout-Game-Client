@@ -22,7 +22,7 @@ private:
     unsigned int rows;
     unsigned int columns;
 
-    //std::vector<Brick> * bricks;
+    std::vector<Brick> * bricks;
 
 public:
     Grid();

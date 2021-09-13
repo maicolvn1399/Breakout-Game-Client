@@ -14,7 +14,7 @@
 #include <ctime>
 #include <time.h>
 #include "Game_GUI/BarPlayer.h"
-#include "Game_GUI/Ball.h"
+#include "GameBreakoutGUI/Ball.h"
 #include "ListaSimple.h"
 using namespace sf;
 using namespace std;
