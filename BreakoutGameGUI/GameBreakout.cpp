@@ -11,10 +11,22 @@ using namespace sf;
 
 GameBreakout::GameBreakout(int w,int h, string title) {
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
-    window->setFramerateLimit(30);
+    //window->setFramerateLimit(30);
+
+    int totalBlocks = static_cast <int>((w /  block.getBlock().getSize().x) * (h / block.getBlock().getSize().y));
+    isBlock = new bool[totalBlocks];
+    for(int i = 0; i < totalBlocks; i++){
+        isBlock[i] = false;
+    }
+    for(int i = 0; i < 160; i++){
+        isBlock[i] = true;
+    }
 }
 
 GameBreakout::~GameBreakout() {
+
+
+    delete[] isBlock;
     delete window;
 }
 
@@ -54,6 +66,27 @@ void GameBreakout::update(float dt) {
 }
 
 void GameBreakout::render() {
+
+    for(int y = 0; y < height; y += block.block.getSize().y){
+        for(int x = 0; x < width; x += block.block.getSize().x){
+            if(isBlock[(int)((x / block.block.getSize().x) + ((y / block.block.getSize().y) * (width / block.getBlock().getSize().x)))]){
+
+                block.block.setFillColor(Color(255, 100, 50));
+                block.block.setOutlineColor(Color(255, 255, 255));
+
+                block.block.setPosition(Vector2f(x, y));
+                window->draw(block.getBlock());
+
+            }
+            else{
+                block.block.setFillColor(Color(rand() % (10 + (y/16)), rand() % (10 + (y/16)), rand()%10));
+                block.block.setOutlineColor(Color(40, 40, 40));
+            }
+            block.block.setPosition(Vector2f(x, y));
+            window->draw(block.getBlock());
+        }
+    }
+
     window->draw(bar.getBar());
     window->draw(ball.getBall());
 }
