@@ -21,11 +21,16 @@ public:
 
     RectangleShape block;
     bool* isBlock;
+    void setFalseValuesToArray();
+    int totalBlocks;
 
 public:
     const RectangleShape &getBlock() const;
     bool *getIsBlock() const;
 
+    void setBlockColors();
+
+    void setBlocksPositions(Vector2f positions);
 };
 
 
