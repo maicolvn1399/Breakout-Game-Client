@@ -12,10 +12,7 @@ using namespace sf;
 GameBreakout::GameBreakout(int w,int h, string title) {
 
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
-
-    window->setFramerateLimit(60);
-
-
+    window->setFramerateLimit(30);
 
 }
 
@@ -42,7 +39,7 @@ void GameBreakout::event() {
 
 }
 
-void GameBreakout::update() {
+void GameBreakout::update(float dt) {
 
     if(ball.getSpeed().y == 0.0f){
         Vector2f position = Vector2f(
@@ -51,8 +48,8 @@ void GameBreakout::update() {
         ball.setPosition(position);
     }else{
         Vector2f position = Vector2f(
-                ball.getBall().getPosition().x + ball.getSpeed().x,
-                ball.getBall().getPosition().y + ball.getSpeed().y
+                ball.getBall().getPosition().x + (ball.getSpeed().x * dt),
+                ball.getBall().getPosition().y + (ball.getSpeed().y * dt)
                 );
         ball.setPosition(position);
 
@@ -73,14 +70,20 @@ void GameBreakout::render() {
 
 void GameBreakout::run() {
 
+    Clock gameClock;
+    float deltaTime = 0.0f;
+
     while(window->isOpen()){
+        gameClock.restart();
         while(window->pollEvent(e)){
             event();
         }
-        update();
+        update(deltaTime);
         window->clear(Color::White);
         render();
         window->display();
+
+        deltaTime = gameClock.getElapsedTime().asSeconds();
     }
 
 

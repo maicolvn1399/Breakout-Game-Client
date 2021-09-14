@@ -24,7 +24,7 @@ public:
     ~GameBreakout();
 
     void event();
-    void update();
+    void update(float dt);
     void render();
     void run();
 

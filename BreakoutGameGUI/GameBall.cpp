@@ -11,7 +11,7 @@ GameBall::GameBall() {
     ball.setOutlineColor(Color::Red);
     ball.setOutlineThickness(1.0f);
 
-    defaultSpeed = 5.0f;
+    defaultSpeed = 400.0f;
     angle = 0.0f;
     speed = Vector2f(0.0f,0.0f);
 }
