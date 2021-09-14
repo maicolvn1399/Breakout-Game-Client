@@ -7,6 +7,7 @@
 
 #include "GameBall.h"
 #include "GameBar.h"
+#include "GameBlock.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -35,6 +36,8 @@ private:
     int height;
     GameBall ball;
     GameBar bar;
+    GameBlock block;
+    bool* isBlock;
 
 
 };
