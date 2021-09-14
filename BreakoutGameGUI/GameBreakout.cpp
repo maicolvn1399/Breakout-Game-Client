@@ -10,10 +10,8 @@ using namespace sf;
 
 
 GameBreakout::GameBreakout(int w,int h, string title) {
-
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
     window->setFramerateLimit(30);
-
 }
 
 GameBreakout::~GameBreakout() {
