@@ -42,3 +42,22 @@ float GameBall::getAngle() const {
 const Vector2f &GameBall::getSpeed() const {
     return speed;
 }
+
+void GameBall::boundariesCollision() {
+
+    if(ball.getPosition().x <= 0.0f){
+        ball.setPosition(Vector2f(0.0f,ball.getPosition().y));
+        speed.x = abs(speed.x);
+    }else if(ball.getPosition().x + (ball.getRadius() * 2.0f) >= 800){
+        ball.setPosition(Vector2f(800 - (ball.getRadius() * 2.0f),ball.getPosition().y));
+        speed.x = -abs(speed.x);
+    }
+
+    if(ball.getPosition().y <= 0.f){
+        ball.setPosition(Vector2f(ball.getPosition().x,0.0f));
+        speed.y = abs(speed.y);
+    }else if(ball.getPosition().y + (ball.getRadius() * 2.0f) >= 600){
+        ball.setPosition(Vector2f(ball.getPosition().x, 600 - (ball.getRadius() * 2.0f)));
+        speed.y = abs(speed.y);
+    }
+}

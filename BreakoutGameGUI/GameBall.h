@@ -26,6 +26,8 @@ public:
     const CircleShape &getBall() const;
     void setPosition(Vector2f pos);
     void angleMovement();
+    void boundariesCollision();
+
 
     float getDefaultSpeed() const;
 

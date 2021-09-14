@@ -15,7 +15,6 @@ GameBreakout::GameBreakout(int w,int h, string title) {
 }
 
 GameBreakout::~GameBreakout() {
-
     delete window;
 }
 
@@ -32,9 +31,6 @@ void GameBreakout::event() {
         ball.setPosition(position);
         ball.angleMovement();
     }
-
-
-
 }
 
 void GameBreakout::update(float dt) {
@@ -44,6 +40,7 @@ void GameBreakout::update(float dt) {
                 bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius(),
                 bar.getBar().getPosition().y - bar.getBar().getSize().y);
         ball.setPosition(position);
+
     }else{
         Vector2f position = Vector2f(
                 ball.getBall().getPosition().x + (ball.getSpeed().x * dt),
@@ -51,19 +48,14 @@ void GameBreakout::update(float dt) {
                 );
         ball.setPosition(position);
 
+        //Ball boundaries collision
+        ball.boundariesCollision();
     }
-
-
-
 }
 
 void GameBreakout::render() {
-
     window->draw(bar.getBar());
     window->draw(ball.getBall());
-
-
-
 }
 
 void GameBreakout::run() {
@@ -83,6 +75,4 @@ void GameBreakout::run() {
 
         deltaTime = gameClock.getElapsedTime().asSeconds();
     }
-
-
 }

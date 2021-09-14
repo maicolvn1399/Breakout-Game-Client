@@ -4,6 +4,7 @@
 
 #ifndef BREAKOUT_GAME_CLIENT_GAMEBLOCK_H
 #define BREAKOUT_GAME_CLIENT_GAMEBLOCK_H
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
