@@ -58,6 +58,6 @@ void GameBall::boundariesCollision() {
         speed.y = abs(speed.y);
     }else if(ball.getPosition().y + (ball.getRadius() * 2.0f) >= 600){
         ball.setPosition(Vector2f(ball.getPosition().x, 600 - (ball.getRadius() * 2.0f)));
-        speed.y = abs(speed.y);
+        speed.y = -abs(speed.y);
     }
 }
