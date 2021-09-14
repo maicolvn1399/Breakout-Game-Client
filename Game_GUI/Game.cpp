@@ -2,10 +2,12 @@
 // Created by maxgm on 3/9/21.
 //
 
+/**
 #include <iostream>
-#include "Game.h"
+
 #include "GameBreakoutGUI/Ball.h"
-#include "BarPlayer.h"
+#include "Game.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -19,7 +21,6 @@ void Game::initializeVariables() {
     this->spawnTimer = this->spawnTimerMax;
     this->maxBalls = 5;
     this->ballsMS = 5.f;
-
 
     this->movingBallsSpawnTimerMax = 10.f;
     this->movingBallsSpawnTimer = this->movingBallsSpawnTimerMax;
@@ -96,12 +97,17 @@ void Game::checkCollision() {
 
 }
 
+ */
+ /**
 void Game::update() {
     /**
      *
      * -Called on main.cpp
      * -Keeps the methods in the mainloop.
      */
+
+
+ /**
     this->pollEvents();
 
     this->spawnBalls();
@@ -115,15 +121,14 @@ void Game::update() {
 
 }
 
+  **/
+
+
+ /**
 void Game::render() {
-    /*
-     * @return void
-     * -Clear old frame
-     * -render objects
-     * -display frame in window
-     *
-     * Renders the game objects
-     */
+
+
+
     this->window->clear(sf::Color::White);
 
     //Render stuff
@@ -152,11 +157,7 @@ void Game::initBalls() {
 
 void Game::spawnMovingBalls() {
 
-    /**
-     * spawn moving balls and set their colors and positions
-     * sets a random position
-     * sets a random color
-     */
+
 
     this->ball.setPosition(
             static_cast<float>(rand() % static_cast<int>(this->window->getSize().x - this->ball.getRadius())),
@@ -170,11 +171,7 @@ void Game::spawnMovingBalls() {
 
 void Game::updateMovingBalls() {
 
-    /**
-     * update the moving ball spawn timer and spawn balls
-     * when the total amount of ball is smaller than the max
-     * moves the balls
-     */
+
 
     //Updating the timer for moving balls spawning
     if(this->movingBalls.size() < this->maxMovingBalls){
@@ -215,12 +212,7 @@ void Game::renderMovingBalls() {
     }
 
 }
-
-
-
-
-
-
+**/
 
 
 

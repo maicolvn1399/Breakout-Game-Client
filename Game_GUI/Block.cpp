@@ -2,6 +2,7 @@
 // Created by maxgm on 11/9/21.
 //
 
+/**
 #include "Block.h"
 #include <iostream>
 
@@ -32,3 +33,4 @@ void Block::update(sf::RenderTarget &target) {
 void Block::render(sf::RenderTarget &target) {
 
 }
+**/

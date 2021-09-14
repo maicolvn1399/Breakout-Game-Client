@@ -20,7 +20,7 @@ using namespace sf;
 using namespace std;
 
 //Class that acts as the game engine wrapper class
-
+/**
 class Game {
 private:
     //Variables
@@ -81,3 +81,4 @@ public:
 
 
 #endif //BREAKOUT_GAME_GAME_H
+**/

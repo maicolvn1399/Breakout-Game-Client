@@ -2,6 +2,7 @@
 // Created by maxgm on 4/9/21.
 //
 
+/**
 #include "BarPlayer.h"
 
 void BarPlayer::initVariables() {
@@ -80,7 +81,7 @@ void BarPlayer::render(sf::RenderTarget *target) {
 
 }
 
-
+**/
 
 
 

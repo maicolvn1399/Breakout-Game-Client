@@ -2,6 +2,7 @@
 // Created by maxgm on 11/9/21.
 //
 
+/**
 #pragma once
 #ifndef BREAKOUT_GAME_CLIENT_BLOCK_H
 #define BREAKOUT_GAME_CLIENT_BLOCK_H
@@ -32,3 +33,4 @@ public:
 
 
 #endif //BREAKOUT_GAME_CLIENT_BLOCK_H
+**/

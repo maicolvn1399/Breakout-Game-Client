@@ -1,15 +1,17 @@
 #include <iostream>
 
 #include "SocketClient/SocketClient.h"
-#include "Game_GUI/ListaSimple.h"
 #include <iostream>
-#include "Game_GUI/Game.h"
+#include "BreakoutGameGUI/GameBreakout.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include "GameBreakoutGUI/GameBO.h"
+
+
+using namespace sf;
+using namespace std;
 
 
 SocketClient* client;
@@ -45,7 +47,7 @@ int main(){
 
 
     //init srand
-    srand(static_cast<unsigned>(time(NULL)));
+    //srand(static_cast<unsigned>(time(NULL)));
 
     //Init game engine
     //Game game;
@@ -61,8 +63,16 @@ int main(){
         //Render
         //game.render();
 
+        GameBreakout game(800,600,"Breakout");
+        game.run();
 
-    }
+
+
+
+
+
+
     //End of application
     return 0;
 }
+

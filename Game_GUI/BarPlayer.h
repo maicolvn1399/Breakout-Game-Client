@@ -2,6 +2,7 @@
 // Created by maxgm on 4/9/21.
 //
 
+/**
 #pragma once
 #ifndef BREAKOUT_GAME_BARPLAYER_H
 #define BREAKOUT_GAME_BARPLAYER_H
@@ -41,3 +42,4 @@ public:
 
 
 #endif //BREAKOUT_GAME_BARPLAYER_H
+**/
