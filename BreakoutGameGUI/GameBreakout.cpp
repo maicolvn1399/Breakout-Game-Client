@@ -55,7 +55,17 @@ void GameBreakout::update(float dt) {
         ball.setPosition(position);
 
         //Ball boundaries collision
-        ball.boundariesCollision();
+        ball.boundariesCollision(bar);
+    }
+    //Ball-Bar collision
+    if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
+    && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
+    && ball.getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
+    && ball.getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y)
+    {
+        ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
+        ball.speed.y = -(abs(ball.getSpeed().y));
+
     }
 }
 

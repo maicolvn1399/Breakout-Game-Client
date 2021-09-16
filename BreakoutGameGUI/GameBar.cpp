@@ -21,13 +21,13 @@ const RectangleShape &GameBar::getBar() const {
 
 void GameBar::barMove() {
     if(Keyboard::isKeyPressed(Keyboard::Left)){
-        bar.move(-15.f * 0.6f,0.f);
+        bar.move(-20.f * 1.5f,0.f);
 
         if(bar.getPosition().x < 0) {
             bar.setPosition(Vector2f(0, bar.getPosition().y));
         }
     }else if(Keyboard::isKeyPressed(Keyboard::Right)){
-        bar.move(15.f * 0.6f,0.f);
+        bar.move(20.f * 1.5f,0.f);
 
         if(bar.getPosition().x > 800 - bar.getSize().x){
             bar.setPosition(Vector2f(800 - bar.getSize().x, bar.getPosition().y));

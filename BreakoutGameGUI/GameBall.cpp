@@ -43,7 +43,7 @@ const Vector2f &GameBall::getSpeed() const {
     return speed;
 }
 
-void GameBall::boundariesCollision() {
+void GameBall::boundariesCollision(GameBar bar) {
 
     if(ball.getPosition().x <= 0.0f){
         ball.setPosition(Vector2f(0.0f,ball.getPosition().y));
@@ -57,7 +57,8 @@ void GameBall::boundariesCollision() {
         ball.setPosition(Vector2f(ball.getPosition().x,0.0f));
         speed.y = abs(speed.y);
     }else if(ball.getPosition().y + (ball.getRadius() * 2.0f) >= 600){
-        ball.setPosition(Vector2f(ball.getPosition().x, 600 - (ball.getRadius() * 2.0f)));
-        speed.y = -abs(speed.y);
+        ball.setPosition(Vector2f(bar.getBar().getPosition().x, bar.getBar().getPosition().y));
+        //speed.y = -abs(speed.y);
+
     }
 }

@@ -10,6 +10,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "GameBar.h"
 using namespace sf;
 using namespace std;
 
@@ -26,7 +27,7 @@ public:
     const CircleShape &getBall() const;
     void setPosition(Vector2f pos);
     void angleMovement();
-    void boundariesCollision();
+    void boundariesCollision(GameBar bar);
 
 
     float getDefaultSpeed() const;
