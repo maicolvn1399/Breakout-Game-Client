@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/maxgm/Downloads/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/michael/Descargas/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/maxgm/Downloads/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -E rm -f
+RM = /home/michael/Descargas/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/maxgm/Escritorio/Datos2/Breakout-Game-Client
+CMAKE_SOURCE_DIR = /home/michael/Documentos/Breakout-Game-Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug
+CMAKE_BINARY_DIR = /home/michael/Documentos/Breakout-Game-Client/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-buil
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/maxgm/Downloads/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/michael/Descargas/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/maxgm/Downloads/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/michael/Descargas/CLion-2021.2.1/clion-2021.2.1/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles /home/michael/Documentos/Breakout-Game-Client/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,101 +129,125 @@ Breakout_Game_Client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/build
 .PHONY : Breakout_Game_Client/fast
 
-Game_GUI/Ball.o: Game_GUI/Ball.cpp.o
-.PHONY : Game_GUI/Ball.o
+BreakoutGameGUI/GameBall.o: BreakoutGameGUI/GameBall.cpp.o
+.PHONY : BreakoutGameGUI/GameBall.o
 
 # target to build an object file
-Game_GUI/Ball.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Ball.cpp.o
-.PHONY : Game_GUI/Ball.cpp.o
+BreakoutGameGUI/GameBall.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBall.cpp.o
+.PHONY : BreakoutGameGUI/GameBall.cpp.o
 
-Game_GUI/Ball.i: Game_GUI/Ball.cpp.i
-.PHONY : Game_GUI/Ball.i
+BreakoutGameGUI/GameBall.i: BreakoutGameGUI/GameBall.cpp.i
+.PHONY : BreakoutGameGUI/GameBall.i
 
 # target to preprocess a source file
-Game_GUI/Ball.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Ball.cpp.i
-.PHONY : Game_GUI/Ball.cpp.i
+BreakoutGameGUI/GameBall.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBall.cpp.i
+.PHONY : BreakoutGameGUI/GameBall.cpp.i
 
-Game_GUI/Ball.s: Game_GUI/Ball.cpp.s
-.PHONY : Game_GUI/Ball.s
+BreakoutGameGUI/GameBall.s: BreakoutGameGUI/GameBall.cpp.s
+.PHONY : BreakoutGameGUI/GameBall.s
 
 # target to generate assembly for a file
-Game_GUI/Ball.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Ball.cpp.s
-.PHONY : Game_GUI/Ball.cpp.s
+BreakoutGameGUI/GameBall.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBall.cpp.s
+.PHONY : BreakoutGameGUI/GameBall.cpp.s
 
-Game_GUI/BarPlayer.o: Game_GUI/BarPlayer.cpp.o
-.PHONY : Game_GUI/BarPlayer.o
+BreakoutGameGUI/GameBar.o: BreakoutGameGUI/GameBar.cpp.o
+.PHONY : BreakoutGameGUI/GameBar.o
 
 # target to build an object file
-Game_GUI/BarPlayer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/BarPlayer.cpp.o
-.PHONY : Game_GUI/BarPlayer.cpp.o
+BreakoutGameGUI/GameBar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBar.cpp.o
+.PHONY : BreakoutGameGUI/GameBar.cpp.o
 
-Game_GUI/BarPlayer.i: Game_GUI/BarPlayer.cpp.i
-.PHONY : Game_GUI/BarPlayer.i
+BreakoutGameGUI/GameBar.i: BreakoutGameGUI/GameBar.cpp.i
+.PHONY : BreakoutGameGUI/GameBar.i
 
 # target to preprocess a source file
-Game_GUI/BarPlayer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/BarPlayer.cpp.i
-.PHONY : Game_GUI/BarPlayer.cpp.i
+BreakoutGameGUI/GameBar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBar.cpp.i
+.PHONY : BreakoutGameGUI/GameBar.cpp.i
 
-Game_GUI/BarPlayer.s: Game_GUI/BarPlayer.cpp.s
-.PHONY : Game_GUI/BarPlayer.s
+BreakoutGameGUI/GameBar.s: BreakoutGameGUI/GameBar.cpp.s
+.PHONY : BreakoutGameGUI/GameBar.s
 
 # target to generate assembly for a file
-Game_GUI/BarPlayer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/BarPlayer.cpp.s
-.PHONY : Game_GUI/BarPlayer.cpp.s
+BreakoutGameGUI/GameBar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBar.cpp.s
+.PHONY : BreakoutGameGUI/GameBar.cpp.s
 
-Game_GUI/Game.o: Game_GUI/Game.cpp.o
-.PHONY : Game_GUI/Game.o
+BreakoutGameGUI/GameBlock.o: BreakoutGameGUI/GameBlock.cpp.o
+.PHONY : BreakoutGameGUI/GameBlock.o
 
 # target to build an object file
-Game_GUI/Game.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Game.cpp.o
-.PHONY : Game_GUI/Game.cpp.o
+BreakoutGameGUI/GameBlock.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBlock.cpp.o
+.PHONY : BreakoutGameGUI/GameBlock.cpp.o
 
-Game_GUI/Game.i: Game_GUI/Game.cpp.i
-.PHONY : Game_GUI/Game.i
+BreakoutGameGUI/GameBlock.i: BreakoutGameGUI/GameBlock.cpp.i
+.PHONY : BreakoutGameGUI/GameBlock.i
 
 # target to preprocess a source file
-Game_GUI/Game.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Game.cpp.i
-.PHONY : Game_GUI/Game.cpp.i
+BreakoutGameGUI/GameBlock.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBlock.cpp.i
+.PHONY : BreakoutGameGUI/GameBlock.cpp.i
 
-Game_GUI/Game.s: Game_GUI/Game.cpp.s
-.PHONY : Game_GUI/Game.s
+BreakoutGameGUI/GameBlock.s: BreakoutGameGUI/GameBlock.cpp.s
+.PHONY : BreakoutGameGUI/GameBlock.s
 
 # target to generate assembly for a file
-Game_GUI/Game.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Game.cpp.s
-.PHONY : Game_GUI/Game.cpp.s
+BreakoutGameGUI/GameBlock.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBlock.cpp.s
+.PHONY : BreakoutGameGUI/GameBlock.cpp.s
 
-Game_GUI/main.o: Game_GUI/main.cpp.o
-.PHONY : Game_GUI/main.o
+BreakoutGameGUI/GameBreakout.o: BreakoutGameGUI/GameBreakout.cpp.o
+.PHONY : BreakoutGameGUI/GameBreakout.o
 
 # target to build an object file
-Game_GUI/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/main.cpp.o
-.PHONY : Game_GUI/main.cpp.o
+BreakoutGameGUI/GameBreakout.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBreakout.cpp.o
+.PHONY : BreakoutGameGUI/GameBreakout.cpp.o
 
-Game_GUI/main.i: Game_GUI/main.cpp.i
-.PHONY : Game_GUI/main.i
+BreakoutGameGUI/GameBreakout.i: BreakoutGameGUI/GameBreakout.cpp.i
+.PHONY : BreakoutGameGUI/GameBreakout.i
 
 # target to preprocess a source file
-Game_GUI/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/main.cpp.i
-.PHONY : Game_GUI/main.cpp.i
+BreakoutGameGUI/GameBreakout.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBreakout.cpp.i
+.PHONY : BreakoutGameGUI/GameBreakout.cpp.i
 
-Game_GUI/main.s: Game_GUI/main.cpp.s
-.PHONY : Game_GUI/main.s
+BreakoutGameGUI/GameBreakout.s: BreakoutGameGUI/GameBreakout.cpp.s
+.PHONY : BreakoutGameGUI/GameBreakout.s
 
 # target to generate assembly for a file
-Game_GUI/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/Game_GUI/main.cpp.s
-.PHONY : Game_GUI/main.cpp.s
+BreakoutGameGUI/GameBreakout.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBreakout.cpp.s
+.PHONY : BreakoutGameGUI/GameBreakout.cpp.s
+
+BreakoutGameGUI/main.o: BreakoutGameGUI/main.cpp.o
+.PHONY : BreakoutGameGUI/main.o
+
+# target to build an object file
+BreakoutGameGUI/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/main.cpp.o
+.PHONY : BreakoutGameGUI/main.cpp.o
+
+BreakoutGameGUI/main.i: BreakoutGameGUI/main.cpp.i
+.PHONY : BreakoutGameGUI/main.i
+
+# target to preprocess a source file
+BreakoutGameGUI/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/main.cpp.i
+.PHONY : BreakoutGameGUI/main.cpp.i
+
+BreakoutGameGUI/main.s: BreakoutGameGUI/main.cpp.s
+.PHONY : BreakoutGameGUI/main.s
+
+# target to generate assembly for a file
+BreakoutGameGUI/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Breakout_Game_Client.dir/build.make CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/main.cpp.s
+.PHONY : BreakoutGameGUI/main.cpp.s
 
 SocketClient/SocketClient.o: SocketClient/SocketClient.cpp.o
 .PHONY : SocketClient/SocketClient.o
@@ -258,18 +282,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Breakout_Game_Client"
-	@echo "... Game_GUI/Ball.o"
-	@echo "... Game_GUI/Ball.i"
-	@echo "... Game_GUI/Ball.s"
-	@echo "... Game_GUI/BarPlayer.o"
-	@echo "... Game_GUI/BarPlayer.i"
-	@echo "... Game_GUI/BarPlayer.s"
-	@echo "... Game_GUI/Game.o"
-	@echo "... Game_GUI/Game.i"
-	@echo "... Game_GUI/Game.s"
-	@echo "... Game_GUI/main.o"
-	@echo "... Game_GUI/main.i"
-	@echo "... Game_GUI/main.s"
+	@echo "... BreakoutGameGUI/GameBall.o"
+	@echo "... BreakoutGameGUI/GameBall.i"
+	@echo "... BreakoutGameGUI/GameBall.s"
+	@echo "... BreakoutGameGUI/GameBar.o"
+	@echo "... BreakoutGameGUI/GameBar.i"
+	@echo "... BreakoutGameGUI/GameBar.s"
+	@echo "... BreakoutGameGUI/GameBlock.o"
+	@echo "... BreakoutGameGUI/GameBlock.i"
+	@echo "... BreakoutGameGUI/GameBlock.s"
+	@echo "... BreakoutGameGUI/GameBreakout.o"
+	@echo "... BreakoutGameGUI/GameBreakout.i"
+	@echo "... BreakoutGameGUI/GameBreakout.s"
+	@echo "... BreakoutGameGUI/main.o"
+	@echo "... BreakoutGameGUI/main.i"
+	@echo "... BreakoutGameGUI/main.s"
 	@echo "... SocketClient/SocketClient.o"
 	@echo "... SocketClient/SocketClient.i"
 	@echo "... SocketClient/SocketClient.s"

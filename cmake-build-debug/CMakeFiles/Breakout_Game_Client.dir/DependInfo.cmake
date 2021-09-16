@@ -8,11 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Ball.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Ball.cpp.o"
-  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/BarPlayer.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/BarPlayer.cpp.o"
-  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/Game.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/Game.cpp.o"
-  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/Game_GUI/main.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/Game_GUI/main.cpp.o"
-  "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/SocketClient/SocketClient.cpp" "/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/SocketClient/SocketClient.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/BreakoutGameGUI/GameBall.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBall.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/BreakoutGameGUI/GameBar.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBar.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/BreakoutGameGUI/GameBlock.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBlock.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/BreakoutGameGUI/GameBreakout.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/GameBreakout.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/BreakoutGameGUI/main.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/BreakoutGameGUI/main.cpp.o"
+  "/home/michael/Documentos/Breakout-Game-Client/SocketClient/SocketClient.cpp" "/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug/CMakeFiles/Breakout_Game_Client.dir/SocketClient/SocketClient.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/cmake-build-debug -I/home/maxgm/Escritorio/Datos2/Breakout-Game-Client -I/home/maxgm/Escritorio/Datos2/Breakout-Game-Client/SFML_INCLUDE_DIR
+CXX_INCLUDES = -I/home/michael/Documentos/Breakout-Game-Client/cmake-build-debug -I/home/michael/Documentos/Breakout-Game-Client -I/home/michael/Documentos/Breakout-Game-Client/SFML_INCLUDE_DIR
 
 CXX_FLAGS = -pthread -g -std=gnu++17
 

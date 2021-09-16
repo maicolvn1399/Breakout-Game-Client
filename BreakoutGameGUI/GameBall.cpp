@@ -6,7 +6,7 @@
 #include "math.h"
 
 GameBall::GameBall() {
-    ball.setRadius(8.0f);
+    ball.setRadius(6.0f);
     ball.setFillColor(Color::Magenta);
     ball.setOutlineColor(Color::Red);
     ball.setOutlineThickness(1.0f);

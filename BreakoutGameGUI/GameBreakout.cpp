@@ -67,6 +67,30 @@ void GameBreakout::update(float dt) {
         ball.speed.y = -(abs(ball.getSpeed().y));
 
     }
+
+
+
+    //Ball-Block Collision
+    for(int y = 0; y < 600/block.getBlock().getSize().y; y++){
+        for(int x = 0; x < 800 / block.getBlock().getSize().x; x++){
+            if(block.isBlock[(int)(x + (y * (800 / block.getBlock().getSize().x)))]){
+
+                if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= x * block.getBlock().getSize().x
+                   && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= y * block.getBlock().getSize().y
+                   && ball.getBall().getPosition().x < (x+1) * (block.getBlock().getSize().x)
+                   && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)){
+
+                    block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                    ball.speed.y = abs(ball.speed.y);
+                    Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                    ball.setPosition(vecPosition);
+
+                }
+            }
+
+        }
+    }
+
 }
 
 void GameBreakout::render() {
