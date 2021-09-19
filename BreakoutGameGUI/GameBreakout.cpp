@@ -4,6 +4,7 @@
 
 #include "GameBreakout.h"
 #include "GameBar.h"
+#include "iostream"
 #include "GameBall.h"
 using namespace std;
 using namespace sf;
@@ -16,7 +17,10 @@ GameBreakout::GameBreakout(int w,int h, string title) {
     block.totalBlocks = (800 / block.getBlock().getSize().x) * (600/block.getBlock().getSize().y);
     block.isBlock = new bool[block.totalBlocks];
 
+    block.wordList = new string[block.totalBlocks];
+    block.hitsToBlock = new int[block.totalBlocks];
     block.setFalseValuesToArray();
+    block.setBlockTypes();
 }
 
 GameBreakout::~GameBreakout() {
@@ -65,7 +69,6 @@ void GameBreakout::update(float dt) {
     {
         ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
         ball.speed.y = -(abs(ball.getSpeed().y));
-
     }
 
 
@@ -80,14 +83,36 @@ void GameBreakout::update(float dt) {
                    && ball.getBall().getPosition().x < (x+1) * (block.getBlock().getSize().x)
                    && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)){
 
-                    block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
-                    ball.speed.y = abs(ball.speed.y);
-                    Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
-                    ball.setPosition(vecPosition);
+                    //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
+                    //dobles o triples según la cantidad de veces que la bola toque el bloque
+                    string blocktype;
+                    blocktype = block.wordList[(int)(x + (y * 800 / block.getBlock().getSize().x))];
+                    cout << blocktype << endl;
+                    if(blocktype == "doble" or blocktype == "triple"){
+                        if(block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] <= 0){
+                            block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                            ball.speed.y = abs(ball.speed.y);
+                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                            ball.setPosition(vecPosition);
+                        }else{
+                            block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] -1;
+                            ball.speed.y = abs(ball.speed.y);
+                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                            ball.setPosition(vecPosition);
+                        }
+                    }else if(blocktype == "sorpresa"){
 
+                        cout << "método para determinar sorpresa van acá" << endl;
+
+                    }else{
+                        block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                        block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))];
+                        ball.speed.y = abs(ball.speed.y);
+                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                        ball.setPosition(vecPosition);
+                    }
                 }
             }
-
         }
     }
 

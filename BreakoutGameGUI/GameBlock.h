@@ -20,7 +20,9 @@ public:
     GameBlock();
 
     RectangleShape block;
+    string* wordList;
     bool* isBlock;
+    int* hitsToBlock;
     void setFalseValuesToArray();
     int totalBlocks;
 
@@ -31,6 +33,8 @@ public:
     void setBlockColors();
 
     void setBlocksPositions(Vector2f positions);
+
+    void setBlockTypes();
 };
 
 
