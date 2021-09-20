@@ -24,6 +24,8 @@ public:
 
     const RectangleShape &getBar() const;
     void barMove();
+    void increaseSize();
+    void decreaseSize();
 };
 
 

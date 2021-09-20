@@ -8,8 +8,7 @@
 #include "GameBall.h"
 #include "GameBar.h"
 #include "GameBlock.h"
-
-
+#include "SocketClient/SocketClient.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -29,8 +28,10 @@ public:
     void update(float dt);
     void render();
     void run();
+    void selectSurprise();
 
 private:
+
     RenderWindow* window = NULL;
     Event e;
     int width;
@@ -38,6 +39,7 @@ private:
     GameBall ball;
     GameBar bar;
     GameBlock block;
+    //string json;
 
 };
 

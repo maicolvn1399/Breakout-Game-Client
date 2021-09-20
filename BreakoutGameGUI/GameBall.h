@@ -28,6 +28,9 @@ public:
     void setPosition(Vector2f pos);
     void angleMovement();
     void boundariesCollision(GameBar bar);
+    void increaseVelocity();
+    void decreaseVelocity();
+
 
 
     float getDefaultSpeed() const;

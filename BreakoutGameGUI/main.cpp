@@ -13,7 +13,7 @@
 using namespace sf;
 using namespace std;
 
-
+/**
 SocketClient* client;
 
 void * clientRun(void *){
@@ -24,6 +24,7 @@ void * clientRun(void *){
     }
     pthread_exit(NULL);
 }
+*/
 
 int main(){
 

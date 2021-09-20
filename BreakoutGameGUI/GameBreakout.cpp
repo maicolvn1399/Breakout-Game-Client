@@ -45,8 +45,6 @@ GameBreakout::GameBreakout(int w,int h, string title) {
 
      */
 
-
-
 }
 
 GameBreakout::~GameBreakout() {

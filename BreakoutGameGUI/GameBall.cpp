@@ -4,6 +4,7 @@
 
 #include "GameBall.h"
 #include "math.h"
+#include "iostream"
 
 GameBall::GameBall() {
     ball.setRadius(6.0f);
@@ -61,4 +62,17 @@ void GameBall::boundariesCollision(GameBar bar) {
         //speed.y = -abs(speed.y);
 
     }
+}
+
+void GameBall::increaseVelocity() {
+    cout << "Increase ball velocity" << endl;
+    speed.x += 2.0f;
+    speed.y += 2.0f;
+
+}
+
+void GameBall::decreaseVelocity() {
+    cout << "Decrease ball velocity" << endl;
+    speed.x -= 1.0f;
+    speed.y -= 1.0f;
 }
