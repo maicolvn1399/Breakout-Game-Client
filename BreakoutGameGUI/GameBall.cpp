@@ -15,6 +15,7 @@ GameBall::GameBall() {
     defaultSpeed = 400.0f;
     angle = 0.0f;
     speed = Vector2f(0.0f,0.0f);
+    speedFactor = 2.0f;
 }
 
 const CircleShape &GameBall::getBall() const {
@@ -75,4 +76,20 @@ void GameBall::decreaseVelocity() {
     cout << "Decrease ball velocity" << endl;
     speed.x -= 1.0f;
     speed.y -= 1.0f;
+}
+
+void GameBall::moveFaster() {
+    float speedFactor = 10.f;
+    float ratio = abs(speed.x)/abs(speed.y);
+
+    if(speed.x < 0.0f)
+        speed.x -= speedFactor;
+    else
+        speed.x += speedFactor;
+
+    if(speed.y < 0.0f)
+        speed.y -= speedFactor * ratio;
+    else
+        speed.y += speedFactor * ratio;
+
 }

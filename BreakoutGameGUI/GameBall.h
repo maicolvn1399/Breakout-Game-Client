@@ -19,6 +19,7 @@ public:
     CircleShape ball;
     float defaultSpeed;
     float angle;
+    float speedFactor;
     Vector2f speed;
 
 public:
@@ -30,6 +31,7 @@ public:
     void boundariesCollision(GameBar bar);
     void increaseVelocity();
     void decreaseVelocity();
+    void moveFaster();
 
 
 

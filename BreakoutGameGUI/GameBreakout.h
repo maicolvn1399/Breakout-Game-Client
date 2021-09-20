@@ -36,6 +36,8 @@ private:
     Event e;
     int width;
     int height;
+    Font font;
+    Text score;
     GameBall ball;
     GameBar bar;
     GameBlock block;

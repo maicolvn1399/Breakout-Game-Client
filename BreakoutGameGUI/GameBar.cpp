@@ -19,24 +19,32 @@ const RectangleShape &GameBar::getBar() const {
     return bar;
 }
 
-void GameBar::barMove() {
-    if(Keyboard::isKeyPressed(Keyboard::Left)){
-        bar.move(-20.f * 1.5f,0.f);
+void GameBar::barMove(Event e, int width, int height, RenderWindow *window) {
+    //if(Keyboard::isKeyPressed(Keyboard::Left)){
+        //bar.move(-20.f * 1.5f,0.f);
 
-        if(bar.getPosition().x < 0) {
-            bar.setPosition(Vector2f(0, bar.getPosition().y));
-        }
-    }else if(Keyboard::isKeyPressed(Keyboard::Right)){
-        bar.move(20.f * 1.5f,0.f);
+        //if(bar.getPosition().x < 0) {
+            //bar.setPosition(Vector2f(0, bar.getPosition().y));
+        //}
+    //}else if(Keyboard::isKeyPressed(Keyboard::Right)){
+        //bar.move(20.f * 1.5f,0.f);
 
-        if(bar.getPosition().x > 800 - bar.getSize().x){
-            bar.setPosition(Vector2f(800 - bar.getSize().x, bar.getPosition().y));
+        //if(bar.getPosition().x > 800 - bar.getSize().x){
+            //bar.setPosition(Vector2f(800 - bar.getSize().x, bar.getPosition().y));
+
+        //}
+        if(e.type == Event::MouseMoved) {
+            bar.setPosition(Vector2f(Mouse::getPosition(*window).x - (bar.getSize().x/2), height - 40));
+
+            if(bar.getPosition().x < 0)
+                bar.setPosition((Vector2f(0, bar.getPosition().y)));
+            else if(bar.getPosition().x > width - bar.getSize().x)
+                bar.setPosition(Vector2f(width - bar.getSize().x, bar.getPosition().y));
+
 
         }
     }
 
-
-}
 
 void GameBar::increaseSize() {
     cout << "Increase bar size" << endl;

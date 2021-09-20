@@ -10,16 +10,16 @@ using namespace std;
 using namespace sf;
 
 
-SocketClient* client;
+//SocketClient* client;
 
-void * clientRun(void *){
-    try{
-        client->conectar();
-    }catch (string ex){
-        cout << ex << endl;
-    }
-    pthread_exit(NULL);
-}
+//void * clientRun(void *){
+    //try{
+        //client->conectar();
+    //}catch (string ex){
+        //cout << ex << endl;
+    //}
+    //pthread_exit(NULL);
+//}
 
 
 GameBreakout::GameBreakout(int w,int h, string title) {
@@ -34,6 +34,15 @@ GameBreakout::GameBreakout(int w,int h, string title) {
     block.hitsToBlock = new int[block.totalBlocks];
     block.setFalseValuesToArray();
     block.setBlockTypes();
+
+    font.loadFromFile("../hinted-CelloSans-Regular.ttf");
+    score.setFont(font);
+    score.setOutlineThickness(2.0f);
+    score.setOutlineColor(Color::Black);
+    score.setPosition(Vector2f(0,0));
+
+    score.setString("0");
+
 
     /**
     json = "Hola desde el cliente";
@@ -57,6 +66,11 @@ void GameBreakout::event() {
         window->close();
     }else if(e.type == Event::MouseMoved){
         bar.bar.setPosition(Vector2f(Mouse::getPosition(*window).x - (bar.bar.getSize().x/2),600 - 40));
+
+        if(bar.bar.getPosition().x < 0)
+            bar.bar.setPosition(Vector2f(0, bar.bar.getPosition().y));
+        else if(bar.bar.getPosition().x > 800 - bar.bar.getSize().x)
+            bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
 
     //bar.barMove();
@@ -100,6 +114,8 @@ void GameBreakout::update(float dt) {
     && ball.getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
     && ball.getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y)
     {
+        ball.moveFaster();
+
         ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
         ball.speed.y = -(abs(ball.getSpeed().y));
     }
@@ -116,6 +132,11 @@ void GameBreakout::update(float dt) {
                    && ball.getBall().getPosition().x < (x+1) * (block.getBlock().getSize().x)
                    && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)){
 
+                    //Score
+                    int scoreInInterger = std::stoi(((std::string)(score.getString())).c_str());
+                    //scoreInInterger += 1;
+                    //score.setString(std::to_string(scoreInInterger));
+
                     //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
                     //dobles o triples según la cantidad de veces que la bola toque el bloque
                     string blocktype;
@@ -127,6 +148,14 @@ void GameBreakout::update(float dt) {
                             ball.speed.y = abs(ball.speed.y);
                             Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
+                            if(blocktype == "doble"){
+                                scoreInInterger += 15;
+                                score.setString(std::to_string(scoreInInterger));
+                            }else{
+                                scoreInInterger += 20;
+                                score.setString(std::to_string(scoreInInterger));
+                            }
+
                         }else{
                             block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] -1;
                             ball.speed.y = abs(ball.speed.y);
@@ -145,6 +174,8 @@ void GameBreakout::update(float dt) {
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+                        scoreInInterger += 10;
+                        score.setString(std::to_string(scoreInInterger));
                     }
                 }
             }
@@ -169,6 +200,7 @@ void GameBreakout::render() {
 
     window->draw(bar.getBar());
     window->draw(ball.getBall());
+    window->draw(score);
 }
 
 void GameBreakout::run() {

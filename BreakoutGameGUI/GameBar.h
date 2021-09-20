@@ -21,9 +21,12 @@ public:
 
 public:
     GameBar();
+    //RenderWindow* window = NULL;
+    int width;
+    int height;
 
     const RectangleShape &getBar() const;
-    void barMove();
+    void barMove(Event e, int width, int height, RenderWindow *window);
     void increaseSize();
     void decreaseSize();
 };
