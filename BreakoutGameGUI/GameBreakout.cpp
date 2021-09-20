@@ -10,7 +10,20 @@ using namespace std;
 using namespace sf;
 
 
+SocketClient* client;
+
+void * clientRun(void *){
+    try{
+        client->conectar();
+    }catch (string ex){
+        cout << ex << endl;
+    }
+    pthread_exit(NULL);
+}
+
+
 GameBreakout::GameBreakout(int w,int h, string title) {
+
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
     //window->setFramerateLimit(30);
 
@@ -21,6 +34,19 @@ GameBreakout::GameBreakout(int w,int h, string title) {
     block.hitsToBlock = new int[block.totalBlocks];
     block.setFalseValuesToArray();
     block.setBlockTypes();
+
+    /**
+    json = "Hola desde el cliente";
+
+    client = new SocketClient;
+    pthread_t hiloClient;
+    pthread_create(&hiloClient,0,clientRun,NULL);
+    pthread_detach(hiloClient);
+
+     */
+
+
+
 }
 
 GameBreakout::~GameBreakout() {
@@ -29,10 +55,13 @@ GameBreakout::~GameBreakout() {
 }
 
 void GameBreakout::event() {
-    if(e.type == Event::Closed)
+    if(e.type == Event::Closed){
         window->close();
+    }else if(e.type == Event::MouseMoved){
+        bar.bar.setPosition(Vector2f(Mouse::getPosition(*window).x - (bar.bar.getSize().x/2),600 - 40));
+    }
 
-    bar.barMove();
+    //bar.barMove();
 
     if(e.type == Event::MouseButtonPressed){
         Vector2f position = Vector2f(
@@ -44,6 +73,12 @@ void GameBreakout::event() {
 }
 
 void GameBreakout::update(float dt) {
+
+    //string msn;
+    //cin >> msn;
+    //if(msn == "salir")
+        //break;
+    //client->setMensaje(json.c_str());
 
     if(ball.getSpeed().y == 0.0f){
         Vector2f position = Vector2f(
@@ -101,9 +136,11 @@ void GameBreakout::update(float dt) {
                             ball.setPosition(vecPosition);
                         }
                     }else if(blocktype == "sorpresa"){
-
-                        cout << "método para determinar sorpresa van acá" << endl;
-
+                        selectSurprise();
+                        block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                        ball.speed.y = abs(ball.speed.y);
+                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                        ball.setPosition(vecPosition);
                     }else{
                         block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
                         block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))];
@@ -153,4 +190,33 @@ void GameBreakout::run() {
 
         deltaTime = gameClock.getElapsedTime().asSeconds();
     }
+}
+
+void GameBreakout::selectSurprise() {
+    int number = rand()% 4 + 1;
+
+    cout << "selectSurprise method" << endl;
+    cout << to_string(number) << endl;
+
+    if(number == 1){
+
+        //Increase bar size
+        bar.increaseSize();
+
+    }else if(number == 2){
+
+        //Decrease bar size
+        bar.decreaseSize();
+
+    }else if(number == 3){
+
+        //Increase velocity of ball
+        ball.increaseVelocity();
+
+    }else{
+
+        //Decrease velocity of ball
+        ball.decreaseVelocity();
+    }
+
 }
