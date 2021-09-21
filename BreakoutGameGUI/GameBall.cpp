@@ -6,6 +6,7 @@
 #include "math.h"
 #include "iostream"
 
+
 GameBall::GameBall() {
     ball.setRadius(6.0f);
     ball.setFillColor(Color::Magenta);

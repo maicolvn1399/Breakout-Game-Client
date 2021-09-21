@@ -12,6 +12,12 @@
 #include <SFML/Network.hpp>
 using namespace sf;
 using namespace std;
+/**
+ * @authors Michael Valverde Navarro y Max Garro Mora
+ * @brief Clase que se encarga de crear los diferentes tipos bloques y posicionarlos en la parte superior de la pantalla
+ * @version 2.0
+ * @date 13/09/2021
+ */
 
 class GameBlock{
 
