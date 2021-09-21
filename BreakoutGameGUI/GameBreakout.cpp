@@ -68,7 +68,7 @@ void GameBreakout::event() {
         bar.bar.setPosition(Vector2f(Mouse::getPosition(*window).x - (bar.bar.getSize().x/2),600 - 40));
 
         if(bar.bar.getPosition().x < 0)
-            bar.bar.setPosition(Vector2f(0, bar.bar.getPosition().y));
+            bar.bar.setPosition(Vector2f(0, bar.bar.getPosition().y)); //
         else if(bar.bar.getPosition().x > 800 - bar.bar.getSize().x)
             bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
