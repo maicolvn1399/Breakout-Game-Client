@@ -5,26 +5,25 @@
 #include "GameBreakout.h"
 #include "GameBar.h"
 #include "iostream"
-#include "GameBall.h"
+
 using namespace std;
 using namespace sf;
 
+SocketClient* client;
 
-//SocketClient* client;
-
-//void * clientRun(void *){
-    //try{
-        //client->conectar();
-    //}catch (string ex){
-        //cout << ex << endl;
-    //}
-    //pthread_exit(NULL);
-//}
-
+void * clientRun(void *){
+    try{
+        client->conectar();
+    }catch (string ex){
+        cout << ex << endl;
+    }
+    pthread_exit(NULL);
+}
 
 GameBreakout::GameBreakout(int w,int h, string title) {
 
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
+
     //window->setFramerateLimit(30);
 
     block.totalBlocks = (800 / block.getBlock().getSize().x) * (600/block.getBlock().getSize().y);
@@ -43,17 +42,10 @@ GameBreakout::GameBreakout(int w,int h, string title) {
 
     score.setString("0");
 
-
-    /**
-    json = "Hola desde el cliente";
-
     client = new SocketClient;
     pthread_t hiloClient;
     pthread_create(&hiloClient,0,clientRun,NULL);
     pthread_detach(hiloClient);
-
-     */
-
 }
 
 GameBreakout::~GameBreakout() {
@@ -68,7 +60,7 @@ void GameBreakout::event() {
         bar.bar.setPosition(Vector2f(Mouse::getPosition(*window).x - (bar.bar.getSize().x/2),600 - 40));
 
         if(bar.bar.getPosition().x < 0)
-            bar.bar.setPosition(Vector2f(0, bar.bar.getPosition().y)); //
+            bar.bar.setPosition(Vector2f(0, bar.bar.getPosition().y));
         else if(bar.bar.getPosition().x > 800 - bar.bar.getSize().x)
             bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
@@ -85,12 +77,6 @@ void GameBreakout::event() {
 }
 
 void GameBreakout::update(float dt) {
-
-    //string msn;
-    //cin >> msn;
-    //if(msn == "salir")
-        //break;
-    //client->setMensaje(json.c_str());
 
     if(ball.getSpeed().y == 0.0f){
         Vector2f position = Vector2f(
@@ -121,7 +107,6 @@ void GameBreakout::update(float dt) {
     }
 
 
-
     //Ball-Block Collision
     for(int y = 0; y < 600/block.getBlock().getSize().y; y++){
         for(int x = 0; x < 800 / block.getBlock().getSize().x; x++){
@@ -134,14 +119,17 @@ void GameBreakout::update(float dt) {
 
                     //Score
                     int scoreInInterger = std::stoi(((std::string)(score.getString())).c_str());
-                    //scoreInInterger += 1;
-                    //score.setString(std::to_string(scoreInInterger));
 
                     //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
-                    //dobles o triples según la cantidad de veces que la bola toque el bloque
+                    //dobles o triples según la cantidad de veces que la bola toque el bloques
                     string blocktype;
+
                     blocktype = block.wordList[(int)(x + (y * 800 / block.getBlock().getSize().x))];
+
                     cout << blocktype << endl;
+                    string json = "From client to server: " + blocktype;
+                    client->setMensaje(json.c_str());
+
                     if(blocktype == "doble" or blocktype == "triple"){
                         if(block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] <= 0){
                             block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
@@ -155,7 +143,6 @@ void GameBreakout::update(float dt) {
                                 scoreInInterger += 20;
                                 score.setString(std::to_string(scoreInInterger));
                             }
-
                         }else{
                             block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] -1;
                             ball.speed.y = abs(ball.speed.y);
@@ -181,7 +168,6 @@ void GameBreakout::update(float dt) {
             }
         }
     }
-
 }
 
 void GameBreakout::render() {
@@ -197,7 +183,6 @@ void GameBreakout::render() {
             }
         }
     }
-
     window->draw(bar.getBar());
     window->draw(ball.getBall());
     window->draw(score);
@@ -223,30 +208,22 @@ void GameBreakout::run() {
 }
 
 void GameBreakout::selectSurprise() {
-    int number = rand()% 4 + 1;
 
+    int number = rand()% 4 + 1;
     cout << "selectSurprise method" << endl;
     cout << to_string(number) << endl;
 
     if(number == 1){
-
         //Increase bar size
         bar.increaseSize();
-
     }else if(number == 2){
-
         //Decrease bar size
         bar.decreaseSize();
-
     }else if(number == 3){
-
         //Increase velocity of ball
         ball.increaseVelocity();
-
     }else{
-
         //Decrease velocity of ball
         ball.decreaseVelocity();
     }
-
 }

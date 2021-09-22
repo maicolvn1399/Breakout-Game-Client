@@ -68,7 +68,8 @@ private:
     GameBall ball;
     GameBar bar;
     GameBlock block;
-    //string json;
+    string json;
+
 
 };
 

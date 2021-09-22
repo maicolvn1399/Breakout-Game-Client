@@ -57,5 +57,4 @@ void *SocketClient::Contolador(void *obj) {
 
 void SocketClient::setMensaje(const char *msn) {
     send(descriptor,msn, strlen(msn),0);
-
 }

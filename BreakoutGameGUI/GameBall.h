@@ -23,6 +23,7 @@ using namespace std;
  */
 
 class GameBall{
+
 public:
     CircleShape ball;
     float defaultSpeed;
