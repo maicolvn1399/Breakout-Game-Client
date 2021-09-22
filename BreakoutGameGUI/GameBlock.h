@@ -13,6 +13,7 @@
 using namespace sf;
 using namespace std;
 /**
+ * @file GameBlock.h
  * @authors Michael Valverde Navarro y Max Garro Mora
  * @brief Clase que se encarga de crear los diferentes tipos bloques y posicionarlos en la parte superior de la pantalla
  * @version 2.0
@@ -23,23 +24,51 @@ class GameBlock{
 
 
 public:
+
+    /**
+     * @brief constructor de la clase GameBlock
+     */
     GameBlock();
 
     RectangleShape block;
     string* wordList;
     bool* isBlock;
     int* hitsToBlock;
+
+    /**
+     * @brief metodo encargado de ingresar todos los valores en true o en false mediante dos for.
+     */
     void setFalseValuesToArray();
     int totalBlocks;
 
 public:
+
+    /**
+     * @brief metodo encargado de retornar block, que funciona para obtener los atributos de este en caso que se llame en otra clase
+     * @return block, representa el objeto block
+     */
     const RectangleShape &getBlock() const;
+
+    /**
+     * @brief metodo encargado de retornar el valor isBlock, este tiene el proposito de marcar el valor en true o false si el bloque fue tocado por la bola
+     * @return isBlock, representa el booleano que determina la colision entre la bola y un bloque
+     */
     bool *getIsBlock() const;
 
+    /**
+     * @brief metodo encargado de establecer los colores de los bloques en pantalla
+     */
     void setBlockColors();
 
+    /**
+     * @brief metodo encargado de establecer la posicion de cada bloque en pantalla
+     * @param positions, representa las posiciones de los bloques
+     */
     void setBlocksPositions(Vector2f positions);
 
+    /**
+     * @brief metodo encargado de contener los tipos de bloques y establece la cantidad de bloques de cada tipo
+     */
     void setBlockTypes();
 };
 

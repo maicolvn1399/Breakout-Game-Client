@@ -17,14 +17,41 @@
 using namespace sf;
 using namespace std;
 
+/**
+ * @file GameBreakout.h
+ * @authors Michael Valverde Navarro y Max Garro Mora
+ * @brief Clase que se encarga de mostrar los objetos en la ventana y contiene toda la logica de la interfaz grafica
+ * @version 2.0
+ * @date 13/09/2021
+ */
+
 class GameBreakout{
 
 
 public:
+
+    /**
+     * @brief constructor de la clase GameBreakout, en el que se inicializan la ventana, los bloques, el puntaje, entre  otros
+     * @param w, representa el ancho de la ventana del programa
+     * @param h, reoresenta la altura de la ventana del programa
+     * @param title, representa el titulo del juego
+     */
     GameBreakout(int w,int h, string title);
+
+    /**
+     * @brief destructor de la clase GameBreakout, encargado de borrar los bloques y cerrar la ventana
+     */
     ~GameBreakout();
 
+    /**
+     * @brief metodo encargado de detectar los eventos sucedidos en el juego, para asi mover el mouse o impulsar la bola con un click al principio
+     */
     void event();
+
+    /**
+     * @brief
+     * @param dt, representa el deltaTime
+     */
     void update(float dt);
     void render();
     void run();
