@@ -12,6 +12,7 @@ GameBar::GameBar() {
     bar.setOutlineThickness(1.0f);
     bar.setOutlineColor(Color::Yellow);
     bar.setPosition(300,560);
+    //bar.setOrigin(Vector2f (50.f, 10.f));
 
 }
 
@@ -57,4 +58,16 @@ void GameBar::decreaseSize() {
         bar.setSize(Vector2f(bar.getSize().x - 10, bar.getSize().y));
     }
 
+}
+
+void GameBar::rotateBar() {
+    int contador = 0;
+    //if(Keyboard::isKeyPressed(Keyboard::A)){
+        //contador += 1;
+        //if(contador <= 1){
+            //bar.setRotation(-20.f);
+        //}else{
+            //bar.setRotation(0.f);
+            //contador = 0;
+        //}
 }

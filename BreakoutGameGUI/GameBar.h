@@ -60,6 +60,8 @@ public:
      * @brief metodo encargado de disminuir el tamano de la barra, este se llama cada vez que una bola cae en la parte inferior de la pantalla
      */
     void decreaseSize();
+
+    void rotateBar();
 };
 
 

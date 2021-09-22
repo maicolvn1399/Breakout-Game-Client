@@ -70,6 +70,8 @@ public:
      * @brief metodo encargado de contener los tipos de bloques y establece la cantidad de bloques de cada tipo
      */
     void setBlockTypes();
+
+    void setBlockColorsDoble();
 };
 
 
