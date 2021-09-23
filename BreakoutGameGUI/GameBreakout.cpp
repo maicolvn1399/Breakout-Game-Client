@@ -5,6 +5,12 @@
 #include "GameBreakout.h"
 #include "GameBar.h"
 #include "iostream"
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/writer.h>
+
+
 
 using namespace std;
 using namespace sf;
@@ -127,6 +133,13 @@ void GameBreakout::update(float dt) {
                     blocktype = block.wordList[(int)(x + (y * 800 / block.getBlock().getSize().x))];
 
                     cout << blocktype << endl;
+                    string json_;
+                    Json::Reader reader;
+                    Json::Value root;
+                    json_ = "{\"blocktype\" : \"myvalue\"}";
+                    reader.parse(json_.c_str(),root);
+                    cout << "Blocktype json: " << root["blocktype"] << endl;
+
                     string json = "From client to server: " + blocktype;
                     client->setMensaje(json.c_str());
 
