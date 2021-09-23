@@ -26,10 +26,6 @@ if (jsoncpp_found)
     message(STATUS "jsoncpp_version:${jsoncpp_version}")
 endif ()
 
-
-
-
-
 if(SFML_FOUND)
     message(STATUS "SFML_INCLUDE_DIR: ${SFML_INCLUDE_DIR}")
     message(STATUS "SFML_LIBRARIES: ${SFML_LIBRARIES}")

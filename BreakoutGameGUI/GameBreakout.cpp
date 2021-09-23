@@ -71,11 +71,18 @@ void GameBreakout::event() {
             bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
 
-    //bar.barMove();
+    //bar.rotateBar();
+    if(Keyboard::isKeyPressed(Keyboard::A)) {
+        bar.bar.setRotation(20.f);
+    } else if(Keyboard::isKeyPressed(Keyboard::D)){
+        bar.bar.setRotation(-20.f);
+    }else{
+        bar.bar.setRotation(0.f);
+    }
 
     if(e.type == Event::MouseButtonPressed){
         Vector2f position = Vector2f(
-                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius(),
+                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius() - bar.getBar().getOrigin().x,
                 bar.getBar().getPosition().y - bar.getBar().getSize().y);
         ball.setPosition(position);
         ball.angleMovement();
