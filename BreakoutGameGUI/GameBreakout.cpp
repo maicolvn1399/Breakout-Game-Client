@@ -72,13 +72,6 @@ void GameBreakout::event() {
     }
 
     bar.rotateBar();
-    //if(Keyboard::isKeyPressed(Keyboard::A)) {
-        //bar.bar.setRotation(20.f);
-    //} else if(Keyboard::isKeyPressed(Keyboard::D)){
-        //bar.bar.setRotation(-20.f);
-    //}else{
-       // bar.bar.setRotation(0.f);
-    //}
 
     if(e.type == Event::MouseButtonPressed){
         Vector2f position = Vector2f(

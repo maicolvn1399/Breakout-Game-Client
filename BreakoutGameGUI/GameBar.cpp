@@ -58,3 +58,13 @@ void GameBar::decreaseSize() {
     }
 
 }
+
+void GameBar::rotateBar() {
+    if(Keyboard::isKeyPressed(Keyboard::A)){
+        bar.rotate(-10.f);
+    }else if(Keyboard::isKeyPressed(Keyboard::D)){
+        bar.rotate(10.f);
+    }else{
+        bar.setRotation(0.f);
+    }
+}
