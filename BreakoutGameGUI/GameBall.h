@@ -30,6 +30,7 @@ public:
     float angle;
     float speedFactor;
     Vector2f speed;
+    int profundidad;
 
 public:
     /**

@@ -17,6 +17,7 @@ GameBall::GameBall() {
     angle = 0.0f;
     speed = Vector2f(0.0f,0.0f);
     speedFactor = 2.0f;
+    profundidad = 0;
 }
 
 const CircleShape &GameBall::getBall() const {

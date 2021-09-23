@@ -126,53 +126,70 @@ void GameBreakout::update(float dt) {
                 if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= x * block.getBlock().getSize().x
                    && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= y * block.getBlock().getSize().y
                    && ball.getBall().getPosition().x < (x+1) * (block.getBlock().getSize().x)
-                   && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)){
+                   && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)) {
 
                     //Score
-                    int scoreInInterger = std::stoi(((std::string)(score.getString())).c_str());
+                    int scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
 
                     //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
                     //dobles o triples según la cantidad de veces que la bola toque el bloques
                     string blocktype;
 
-                    blocktype = block.wordList[(int)(x + (y * 800 / block.getBlock().getSize().x))];
+                    blocktype = block.wordList[(int) (x + (y * 800 / block.getBlock().getSize().x))];
 
                     cout << blocktype << endl;
                     string json_;
                     Json::Reader reader;
                     Json::Value root;
                     json_ = "{\"blocktype\" : \"myvalue\"}";
-                    reader.parse(json_.c_str(),root);
+                    reader.parse(json_.c_str(), root);
                     cout << "Blocktype json: " << root["blocktype"] << endl;
 
                     string json = "From client to server: " + blocktype;
                     client->setMensaje(json.c_str());
 
-                    if(blocktype == "doble" or blocktype == "triple"){
-                        if(block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] <= 0){
-                            block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                    if (blocktype == "doble" or blocktype == "triple") {
+                        if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
+                            block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
                             ball.speed.y = abs(ball.speed.y);
-                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                                                            (y + 1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
-                            if(blocktype == "doble"){
+                            if (blocktype == "doble") {
                                 scoreInInterger += 15;
                                 score.setString(std::to_string(scoreInInterger));
-                            }else{
+                            } else {
                                 scoreInInterger += 20;
                                 score.setString(std::to_string(scoreInInterger));
                             }
-                        }else{
-                            block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] -1;
+                        } else {
+                            block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
+                                    block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] - 1;
                             ball.speed.y = abs(ball.speed.y);
-                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                                                            (y + 1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
                         }
-                    }else if(blocktype == "sorpresa"){
+                    } else if (blocktype == "sorpresa") {
                         selectSurprise();
-                        block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                        block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
                         ball.speed.y = abs(ball.speed.y);
-                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                                                        (y + 1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+                    }else if(blocktype == "interno") {
+                        if(ball.profundidad > 0){
+                            scoreInInterger += 30;
+                            score.setString(std::to_string(scoreInInterger));
+                            block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+                        }
+
+                    }else if(blocktype == "profundo"){
+                        ball.profundidad += 1;
+                        if(ball.profundidad > 0){
+
+                        }
+
                     }else{
                         block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
                         block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))];
