@@ -71,18 +71,18 @@ void GameBreakout::event() {
             bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
 
-    //bar.rotateBar();
-    if(Keyboard::isKeyPressed(Keyboard::A)) {
-        bar.bar.setRotation(20.f);
-    } else if(Keyboard::isKeyPressed(Keyboard::D)){
-        bar.bar.setRotation(-20.f);
-    }else{
-        bar.bar.setRotation(0.f);
-    }
+    bar.rotateBar();
+    //if(Keyboard::isKeyPressed(Keyboard::A)) {
+        //bar.bar.setRotation(20.f);
+    //} else if(Keyboard::isKeyPressed(Keyboard::D)){
+        //bar.bar.setRotation(-20.f);
+    //}else{
+       // bar.bar.setRotation(0.f);
+    //}
 
     if(e.type == Event::MouseButtonPressed){
         Vector2f position = Vector2f(
-                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius() - bar.getBar().getOrigin().x,
+                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius(),
                 bar.getBar().getPosition().y - bar.getBar().getSize().y);
         ball.setPosition(position);
         ball.angleMovement();
@@ -117,7 +117,12 @@ void GameBreakout::update(float dt) {
 
         ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
         ball.speed.y = -(abs(ball.getSpeed().y));
-    }
+        //En caso de tocar la sorpresa
+    }//else if(bar.getBar().getGlobalBounds().intersects(ball.getBall().getGlobalBounds())){
+
+        //ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
+        //ball.speed.y = -(abs(ball.getSpeed().y));
+    //}
 
 
     //Ball-Block Collision
