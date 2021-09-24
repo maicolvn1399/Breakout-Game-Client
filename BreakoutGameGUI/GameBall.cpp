@@ -6,11 +6,10 @@
 #include "math.h"
 #include "iostream"
 
-
 GameBall::GameBall() {
     ball.setRadius(6.0f);
-    ball.setFillColor(Color::Magenta);
-    ball.setOutlineColor(Color::Red);
+    ball.setFillColor(Color::White);
+    ball.setOutlineColor(Color::Cyan);
     ball.setOutlineThickness(1.0f);
 
     defaultSpeed = 400.0f;
@@ -81,7 +80,7 @@ void GameBall::decreaseVelocity() {
 }
 
 void GameBall::moveFaster() {
-    float speedFactor = 10.f;
+    float speedFactor = 4.f;
     float ratio = abs(speed.x)/abs(speed.y);
 
     if(speed.x < 0.0f)

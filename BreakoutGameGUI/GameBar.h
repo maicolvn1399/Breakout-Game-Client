@@ -61,9 +61,6 @@ public:
      */
     void decreaseSize();
 
-    /**
-     * @brief metodo encargado de rotar la barra con un angulo de 10 float, se puede mantener presionado cualquiera de los dos botones asignados y asi la barra puede girar, una vez se dejen de presionar, se retorna a la posicion inicial.
-     */
     void rotateBar();
 };
 

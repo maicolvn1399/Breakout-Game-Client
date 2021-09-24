@@ -62,3 +62,8 @@ void GameBlock::setBlocksPositions(Vector2f positions){
     block.setPosition(positions);
 }
 
+void GameBlock::setBlockColorsDoble() {
+    block.setFillColor(Color(235,174,52));
+    block.setOutlineColor(Color(255,255,255));
+}
+

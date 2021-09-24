@@ -5,6 +5,7 @@
 #include "GameBreakout.h"
 #include "GameBar.h"
 #include "iostream"
+#include <cstdio>
 #include <jsoncpp/json/value.h>
 #include <jsoncpp/json/json.h>
 #include <jsoncpp/json/reader.h>
@@ -47,6 +48,9 @@ GameBreakout::GameBreakout(int w,int h, string title) {
     score.setPosition(Vector2f(0,0));
 
     score.setString("0");
+
+    textureImage.loadFromFile("../bg_2.jpg");
+    spriteImage.setTexture(textureImage);
 
     client = new SocketClient;
     pthread_t hiloClient;
@@ -137,16 +141,20 @@ void GameBreakout::update(float dt) {
 
                     blocktype = block.wordList[(int) (x + (y * 800 / block.getBlock().getSize().x))];
 
-                    cout << blocktype << endl;
+                    string blocktype_json = "\""+blocktype+"\"";
                     string json_;
+
                     Json::Reader reader;
-                    Json::Value root;
-                    json_ = "{\"blocktype\" : \"myvalue\"}";
+
+                    json_ = "{\"info\" : " + blocktype_json+ "}";
                     reader.parse(json_.c_str(), root);
-                    cout << "Blocktype json: " << root["blocktype"] << endl;
+                    //cout << "Blocktype json: " << root["blocktype"] << endl;
+                    cout << json_ << endl;
 
                     string json = "From client to server: " + blocktype;
-                    client->setMensaje(json.c_str());
+                    client->setMensaje(json_.c_str());
+
+                    cout << "Client get message : " << client->getMessageInfo()<< endl;
 
                     if (blocktype == "doble" or blocktype == "triple") {
                         if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
@@ -235,6 +243,7 @@ void GameBreakout::run() {
         }
         update(deltaTime);
         window->clear(Color::White);
+        window->draw(spriteImage);
         render();
         window->display();
 

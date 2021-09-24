@@ -8,6 +8,10 @@
 #include "GameBall.h"
 #include "GameBar.h"
 #include "GameBlock.h"
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/writer.h>
 #include "SocketClient/SocketClient.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -49,12 +53,24 @@ public:
     void event();
 
     /**
-     * @brief
+     * @brief metodo encargado de detectar las colisiones entre bola-limites de pantalla, barra-bola y barra-bloque
      * @param dt, representa el deltaTime
      */
     void update(float dt);
+
+    /**
+     * @brief metodo encargado de mostrar los bloques, la barra, la bola y el puntaje
+     */
     void render();
+
+    /**
+     * @brief metodo encargado de ejecutar todos los metodos del juego mientras que la ventana este abierta
+     */
     void run();
+
+    /**
+     * @brief metodo encargado de seleccionar aleatoriamente las sorpresas: incrementar el tamano de la barra, disminuir el tamano de la barra, auemntar la velocidad de la bola y disminuir la velocidad de la bola
+     */
     void selectSurprise();
 
 private:
@@ -69,6 +85,9 @@ private:
     GameBar bar;
     GameBlock block;
     string json;
+    Json::Value root;
+    Texture textureImage;
+    Sprite spriteImage;
 
 
 };

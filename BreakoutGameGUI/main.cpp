@@ -4,7 +4,6 @@
 #include <iostream>
 #include "BreakoutGameGUI/GameBreakout.h"
 
-#include "SocketClient/SocketClient.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>

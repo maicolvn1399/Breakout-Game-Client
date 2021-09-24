@@ -25,14 +25,16 @@ void SocketClient::conectar() {
 
     }
     cout << "Se ha conectado correctamente" << endl;
-    pthread_t hilo;
-    pthread_create(&hilo,0,SocketClient::Contolador,(void *)this);
-    pthread_detach(hilo);
+    //pthread_t hilo;
+    //pthread_create(&hilo,0,SocketClient::Contolador,(void *)this);
+    //pthread_detach(hilo);
+    Contolador((void *)this);
 }
 
 void *SocketClient::Contolador(void *obj) {
     SocketClient *c = (SocketClient *)obj;
     while(true){
+
         string mensaje;
         char buffer[1024] = {0};
         //poner condicion cuando el juego termina para cerrar el bucle
@@ -48,7 +50,10 @@ void *SocketClient::Contolador(void *obj) {
                 break;
             }
         }
-        cout << mensaje << endl;
+        //cout << mensaje << endl;
+        setMessageInfo(mensaje);
+
+
         //aca se puede enviar mensajes para otra clase o para el servidor
     }
     close(c->descriptor);
@@ -57,4 +62,12 @@ void *SocketClient::Contolador(void *obj) {
 
 void SocketClient::setMensaje(const char *msn) {
     send(descriptor,msn, strlen(msn),0);
+}
+
+const string &SocketClient::getMessageInfo() const {
+    return message_info;
+}
+
+void SocketClient::setMessageInfo(const string &messageInfo) {
+    message_info = messageInfo;
 }

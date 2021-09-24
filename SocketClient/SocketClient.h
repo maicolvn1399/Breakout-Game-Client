@@ -23,11 +23,17 @@ public:
     void conectar();
     void setMensaje(const char* msn);
 
+    const string &getMessageInfo() const;
+
+    void setMessageInfo(const string &messageInfo);
+
+    string message_info;
+
 private:
     int descriptor;
     sockaddr_in info;
 
-    static void* Contolador(void* obj);
+    void* Contolador(void* obj);
 
 };
 
