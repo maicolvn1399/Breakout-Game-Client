@@ -27,7 +27,7 @@ void * clientRun(void *){
     pthread_exit(NULL);
 }
 
-GameBreakout::GameBreakout(int w,int h, string title) {
+GameBreakout::GameBreakout(int w,int h, string title, string name) {
 
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
 
@@ -49,8 +49,20 @@ GameBreakout::GameBreakout(int w,int h, string title) {
 
     score.setString("0");
 
+    //font2.loadFromFile("../hinted-CelloSans-Regular.ttf");
+    nombre.setFont(font);
+    nombre.setOutlineThickness(2.0f);
+    nombre.setOutlineColor(Color::Black);
+    nombre.setPosition(Vector2f(500, 0));
+    playerName = name;
+
+    nombre.setString(playerName);
+
+
     textureImage.loadFromFile("../bg_2.jpg");
     spriteImage.setTexture(textureImage);
+
+
 
     client = new SocketClient;
     pthread_t hiloClient;
@@ -229,6 +241,7 @@ void GameBreakout::render() {
     window->draw(bar.getBar());
     window->draw(ball.getBall());
     window->draw(score);
+    window->draw(nombre);
 }
 
 void GameBreakout::run() {

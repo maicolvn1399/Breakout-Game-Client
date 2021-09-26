@@ -40,7 +40,7 @@ public:
      * @param h, reoresenta la altura de la ventana del programa
      * @param title, representa el titulo del juego
      */
-    GameBreakout(int w,int h, string title);
+    GameBreakout(int w,int h, string title, string name);
 
     /**
      * @brief destructor de la clase GameBreakout, encargado de borrar los bloques y cerrar la ventana
@@ -80,6 +80,9 @@ private:
     int width;
     int height;
     Font font;
+    Font font2;
+    String playerName;
+    Text nombre;
     Text score;
     GameBall ball;
     GameBar bar;

@@ -123,7 +123,11 @@ int main(){
         //Render
         //game.render();
 
-        GameBreakout game(800,600,"Breakout");
+        string name;
+        cout << "Ingrese su nombre:";
+        getline(cin, name);
+
+        GameBreakout game(800,600,"Breakout", name);
         game.run();
 
     return 0;
