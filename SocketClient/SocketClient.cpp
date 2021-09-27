@@ -52,7 +52,7 @@ void *SocketClient::Contolador(void *obj) {
                 break;
             }
         }
-        //cout << mensaje << endl;
+        cout << mensaje << endl;
         setMessageInfo(mensaje);
 
 

@@ -115,7 +115,7 @@ void GameBreakout::update(float dt) {
         Vector2f position = Vector2f(
                 ball.getBall().getPosition().x + (ball.getSpeed().x * dt),
                 ball.getBall().getPosition().y + (ball.getSpeed().y * dt)
-                );
+        );
         ball.setPosition(position);
 
         //Ball boundaries collision
@@ -123,9 +123,9 @@ void GameBreakout::update(float dt) {
     }
     //Ball-Bar collision
     if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
-    && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
-    && ball.getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
-    && ball.getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y)
+       && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
+       && ball.getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
+       && ball.getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y)
     {
         ball.moveFaster();
 
@@ -134,8 +134,8 @@ void GameBreakout::update(float dt) {
         //En caso de tocar la sorpresa
     }//else if(bar.getBar().getGlobalBounds().intersects(ball.getBall().getGlobalBounds())){
 
-        //ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
-        //ball.speed.y = -(abs(ball.getSpeed().y));
+    //ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
+    //ball.speed.y = -(abs(ball.getSpeed().y));
     //}
 
 
@@ -179,6 +179,8 @@ void GameBreakout::update(float dt) {
                                                             (y + 1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
 
+                            cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
+
                             //Send to the server
                             string blocktype_json = "\""+blocktype+"\"";
                             string json_;
@@ -203,17 +205,17 @@ void GameBreakout::update(float dt) {
 
                             cout << root["block_points"].asString() << endl;
 
-                            scoreInInterger += stoi(root["block_points"].asString());
-                            score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += stoi(root["block_points"].asString());
+                            //score.setString(std::to_string(scoreInInterger));
 
                             //if (blocktype == "doble") {
 
-                                //scoreInInterger += 15;
-                                //score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += 15;
+                            //score.setString(std::to_string(scoreInInterger));
                             //} else {
 
-                                //scoreInInterger += 20;
-                                //score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += 20;
+                            //score.setString(std::to_string(scoreInInterger));
                             //}
                         } else {
                             block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
@@ -230,6 +232,8 @@ void GameBreakout::update(float dt) {
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
                                                         (y + 1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+
+                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
 
 
                         string blocktype_json = "\""+blocktype+"\"";
@@ -253,8 +257,8 @@ void GameBreakout::update(float dt) {
 
                         cout << root["block_points"].asString()<< endl;
 
-                        scoreInInterger += stoi(root["block_points"].asString());
-                        score.setString(std::to_string(scoreInInterger));
+                        //scoreInInterger += stoi(root["block_points"].asString());
+                        //score.setString(std::to_string(scoreInInterger));
 
 
                     }else if(blocktype == "interno") {
@@ -270,6 +274,7 @@ void GameBreakout::update(float dt) {
 
 
                         }
+                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
 
                         string blocktype_json = "\""+blocktype+"\"";
                         string json_;
@@ -288,14 +293,22 @@ void GameBreakout::update(float dt) {
                         reader.parse(receivedMessage,root);
                         cout << root["block_points"].asString() << endl;
 
-                        scoreInInterger += stoi(root["block_points"].asString());
-                        score.setString(std::to_string(scoreInInterger));
+                        //scoreInInterger += stoi(root["block_points"].asString());
+                        //score.setString(std::to_string(scoreInInterger));
 
                     }else if(blocktype == "profundo"){
                         ball.profundidad += 1;
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+                        if(ball.profundidad >= 2){
+                            block.isBlock[(int)((x + (y * 800 / block.getBlock().getSize().x)) - 27 * ball.profundidad)] = false;
+                            ball.speed.y = abs(ball.speed.y);
+                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                            ball.setPosition(vecPosition);
+                            ball.profundidad = 0;
+                        }
+                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
 
                     }else{
                         block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
@@ -303,6 +316,8 @@ void GameBreakout::update(float dt) {
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+
+                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
 
                         string blocktype_json = "\""+blocktype+"\"";
                         string json_;
@@ -321,8 +336,8 @@ void GameBreakout::update(float dt) {
                         reader.parse(receivedMessage,root);
                         cout << root["block_points"].asString() << endl;
 
-                        scoreInInterger += stoi(root["block_points"].asString());
-                        score.setString(std::to_string(scoreInInterger));
+                        //scoreInInterger += stoi(root["block_points"].asString());
+                        //score.setString(std::to_string(scoreInInterger));
                     }
                 }
             }

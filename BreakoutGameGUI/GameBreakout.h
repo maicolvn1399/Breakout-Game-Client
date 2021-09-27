@@ -82,8 +82,8 @@ private:
     int width;
     int height;
     Font font;
-    Font font2;
     String playerName;
+    int port;
     Text nombre;
     Text score;
     GameBall ball;
