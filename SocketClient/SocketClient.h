@@ -30,6 +30,8 @@ public:
     string message_info;
     int port;
 
+
+
 private:
     int descriptor;
     sockaddr_in info;

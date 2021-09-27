@@ -15,6 +15,8 @@ void SocketClient::conectar() {
     if(descriptor < 0) //valida creación de socket
         cout << "Error al crear el socket " << endl;
 
+
+
     info.sin_family = AF_INET;// tipo de conexion ipv4
     info.sin_addr.s_addr = inet_addr("127.0.0.1"); //aceptamos a cualquier cliente
     info.sin_port = ntohs(port);//define el puerto

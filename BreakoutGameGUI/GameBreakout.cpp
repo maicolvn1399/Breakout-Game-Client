@@ -198,7 +198,7 @@ void GameBreakout::update(float dt) {
 
                             receivedMessage = client->getMessageInfo();
 
-                            reader.parse(receivedMessage,root),
+                            reader.parse(receivedMessage,root);
 
                             cout << root["block_points"].asString() << endl;
 
@@ -206,11 +206,15 @@ void GameBreakout::update(float dt) {
                             score.setString(std::to_string(scoreInInterger));
 
 
+
+
                             //if (blocktype == "doble") {
 
                                 //scoreInInterger += 15;
                                 //score.setString(std::to_string(scoreInInterger));
                             //} else {
+
+
 
                                 //scoreInInterger += 20;
                                 //score.setString(std::to_string(scoreInInterger));
@@ -249,7 +253,7 @@ void GameBreakout::update(float dt) {
 
                         receivedMessage = client->getMessageInfo();
 
-                        reader.parse(receivedMessage,root),
+                        reader.parse(receivedMessage,root);
 
                         cout << root["block_points"].asString()<< endl;
 
@@ -280,7 +284,7 @@ void GameBreakout::update(float dt) {
 
                         receivedMessage = client->getMessageInfo();
 
-                        reader.parse(receivedMessage,root),
+                        reader.parse(receivedMessage,root);
 
                         cout << root["block_points"].asString() << endl;
 
@@ -317,7 +321,7 @@ void GameBreakout::update(float dt) {
                         cout << "Client get message : " << client->getMessageInfo()<< endl;
                         receivedMessage = client->getMessageInfo();
 
-                        reader.parse(receivedMessage,root),
+                        reader.parse(receivedMessage,root);
                         cout << root["block_points"].asString() << endl;
 
                         scoreInInterger += stoi(root["block_points"].asString());
