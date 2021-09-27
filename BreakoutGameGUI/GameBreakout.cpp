@@ -12,7 +12,6 @@
 #include <jsoncpp/json/writer.h>
 
 
-
 using namespace std;
 using namespace sf;
 
@@ -188,6 +187,7 @@ void GameBreakout::update(float dt) {
                             json_ = "{\"info\" : " + blocktype_json+ "}";
                             reader.parse(json_.c_str(), root);
                             //cout << "Blocktype json: " << root["blocktype"] << endl;
+                            //###
                             cout << json_ << endl;
 
                             client->setMensaje(json_.c_str());
@@ -200,21 +200,17 @@ void GameBreakout::update(float dt) {
 
                             reader.parse(receivedMessage,root);
 
+
                             cout << root["block_points"].asString() << endl;
 
                             scoreInInterger += stoi(root["block_points"].asString());
                             score.setString(std::to_string(scoreInInterger));
-
-
-
 
                             //if (blocktype == "doble") {
 
                                 //scoreInInterger += 15;
                                 //score.setString(std::to_string(scoreInInterger));
                             //} else {
-
-
 
                                 //scoreInInterger += 20;
                                 //score.setString(std::to_string(scoreInInterger));
@@ -262,10 +258,17 @@ void GameBreakout::update(float dt) {
 
 
                     }else if(blocktype == "interno") {
+                        ball.speed.y = abs(ball.speed.y);
+                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                                                        (y + 1) * block.getBlock().getSize().y);
+                        ball.setPosition(vecPosition);
+
                         if(ball.profundidad > 0){
                             //scoreInInterger += 30;
                             //score.setString(std::to_string(scoreInInterger));
                             block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
+
+
                         }
 
                         string blocktype_json = "\""+blocktype+"\"";
@@ -281,20 +284,15 @@ void GameBreakout::update(float dt) {
                         cout << "Client get message : " << client->getMessageInfo()<< endl;
 
                         string receivedMessage;
-
                         receivedMessage = client->getMessageInfo();
-
                         reader.parse(receivedMessage,root);
-
                         cout << root["block_points"].asString() << endl;
-
 
                         scoreInInterger += stoi(root["block_points"].asString());
                         score.setString(std::to_string(scoreInInterger));
 
                     }else if(blocktype == "profundo"){
                         ball.profundidad += 1;
-
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
@@ -305,7 +303,6 @@ void GameBreakout::update(float dt) {
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
-
 
                         string blocktype_json = "\""+blocktype+"\"";
                         string json_;
