@@ -27,7 +27,9 @@ void * clientRun(void *){
     pthread_exit(NULL);
 }
 
-GameBreakout::GameBreakout(int w,int h, string title, string name) {
+GameBreakout::GameBreakout(int w,int h, string title, string name, string portNumber) {
+
+
 
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
 
@@ -38,6 +40,7 @@ GameBreakout::GameBreakout(int w,int h, string title, string name) {
 
     block.wordList = new string[block.totalBlocks];
     block.hitsToBlock = new int[block.totalBlocks];
+    block.blockColorList = new int[block.totalBlocks];
     block.setFalseValuesToArray();
     block.setBlockTypes();
 
@@ -63,8 +66,11 @@ GameBreakout::GameBreakout(int w,int h, string title, string name) {
     spriteImage.setTexture(textureImage);
 
 
+    int portInInteger = stoi(portNumber);
+
 
     client = new SocketClient;
+    client->port = portInInteger;
     pthread_t hiloClient;
     pthread_create(&hiloClient,0,clientRun,NULL);
     pthread_detach(hiloClient);
@@ -153,20 +159,18 @@ void GameBreakout::update(float dt) {
 
                     blocktype = block.wordList[(int) (x + (y * 800 / block.getBlock().getSize().x))];
 
+                    cout << blocktype << endl;
+
                     string blocktype_json = "\""+blocktype+"\"";
                     string json_;
-
                     Json::Reader reader;
 
                     json_ = "{\"info\" : " + blocktype_json+ "}";
                     reader.parse(json_.c_str(), root);
                     //cout << "Blocktype json: " << root["blocktype"] << endl;
-                    cout << json_ << endl;
-
-                    string json = "From client to server: " + blocktype;
-                    client->setMensaje(json_.c_str());
-
-                    cout << "Client get message : " << client->getMessageInfo()<< endl;
+                    //cout << json_ << endl;
+                    //client->setMensaje(json_.c_str());
+                    //cout << "Client get message : " << client->getMessageInfo()<< endl;
 
                     if (blocktype == "doble" or blocktype == "triple") {
                         if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
@@ -175,13 +179,42 @@ void GameBreakout::update(float dt) {
                             Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
-                            if (blocktype == "doble") {
-                                scoreInInterger += 15;
-                                score.setString(std::to_string(scoreInInterger));
-                            } else {
-                                scoreInInterger += 20;
-                                score.setString(std::to_string(scoreInInterger));
-                            }
+
+                            //Send to the server
+                            string blocktype_json = "\""+blocktype+"\"";
+                            string json_;
+                            Json::Reader reader;
+
+                            json_ = "{\"info\" : " + blocktype_json+ "}";
+                            reader.parse(json_.c_str(), root);
+                            //cout << "Blocktype json: " << root["blocktype"] << endl;
+                            cout << json_ << endl;
+
+                            client->setMensaje(json_.c_str());
+
+                            cout << "Client get message : " << client->getMessageInfo()<< endl;
+
+                            string receivedMessage;
+
+                            receivedMessage = client->getMessageInfo();
+
+                            reader.parse(receivedMessage,root),
+
+                            cout << root["block_points"].asString() << endl;
+
+                            scoreInInterger += stoi(root["block_points"].asString());
+                            score.setString(std::to_string(scoreInInterger));
+
+
+                            //if (blocktype == "doble") {
+
+                                //scoreInInterger += 15;
+                                //score.setString(std::to_string(scoreInInterger));
+                            //} else {
+
+                                //scoreInInterger += 20;
+                                //score.setString(std::to_string(scoreInInterger));
+                            //}
                         } else {
                             block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
                                     block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] - 1;
@@ -197,18 +230,70 @@ void GameBreakout::update(float dt) {
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
                                                         (y + 1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
+
+
+                        string blocktype_json = "\""+blocktype+"\"";
+                        string json_;
+                        Json::Reader reader;
+
+                        json_ = "{\"info\" : " + blocktype_json+ "}";
+                        reader.parse(json_.c_str(), root);
+                        //cout << "Blocktype json: " << root["blocktype"] << endl;
+                        cout << json_ << endl;
+
+                        client->setMensaje(json_.c_str());
+
+                        cout << "Client get message : " << client->getMessageInfo()<< endl;
+
+                        string receivedMessage;
+
+                        receivedMessage = client->getMessageInfo();
+
+                        reader.parse(receivedMessage,root),
+
+                        cout << root["block_points"].asString()<< endl;
+
+                        scoreInInterger += stoi(root["block_points"].asString());
+                        score.setString(std::to_string(scoreInInterger));
+
+
                     }else if(blocktype == "interno") {
                         if(ball.profundidad > 0){
-                            scoreInInterger += 30;
-                            score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += 30;
+                            //score.setString(std::to_string(scoreInInterger));
                             block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
                         }
 
+                        string blocktype_json = "\""+blocktype+"\"";
+                        string json_;
+                        Json::Reader reader;
+
+                        json_ = "{\"info\" : " + blocktype_json+ "}";
+                        reader.parse(json_.c_str(), root);
+                        //cout << "Blocktype json: " << root["blocktype"] << endl;
+                        cout << json_ << endl;
+
+                        client->setMensaje(json_.c_str());
+                        cout << "Client get message : " << client->getMessageInfo()<< endl;
+
+                        string receivedMessage;
+
+                        receivedMessage = client->getMessageInfo();
+
+                        reader.parse(receivedMessage,root),
+
+                        cout << root["block_points"].asString() << endl;
+
+
+                        scoreInInterger += stoi(root["block_points"].asString());
+                        score.setString(std::to_string(scoreInInterger));
+
                     }else if(blocktype == "profundo"){
                         ball.profundidad += 1;
-                        if(ball.profundidad > 0){
 
-                        }
+                        ball.speed.y = abs(ball.speed.y);
+                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
+                        ball.setPosition(vecPosition);
 
                     }else{
                         block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
@@ -216,7 +301,26 @@ void GameBreakout::update(float dt) {
                         ball.speed.y = abs(ball.speed.y);
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
-                        scoreInInterger += 10;
+
+
+                        string blocktype_json = "\""+blocktype+"\"";
+                        string json_;
+                        Json::Reader reader;
+                        Json::Value root;
+
+                        json_ = "{\"info\" : " + blocktype_json+ "}";
+                        reader.parse(json_.c_str(), root);
+                        //cout << "Blocktype json: " << root["blocktype"] << endl;
+                        cout << json_ << endl;
+                        string receivedMessage;
+                        client->setMensaje(json_.c_str());
+                        cout << "Client get message : " << client->getMessageInfo()<< endl;
+                        receivedMessage = client->getMessageInfo();
+
+                        reader.parse(receivedMessage,root),
+                        cout << root["block_points"].asString() << endl;
+
+                        scoreInInterger += stoi(root["block_points"].asString());
                         score.setString(std::to_string(scoreInInterger));
                     }
                 }
@@ -231,7 +335,33 @@ void GameBreakout::render() {
         for(int x = 0; x < 800; x += block.getBlock().getSize().y){
             if(block.isBlock[(int)(((x / block.getBlock().getSize().x)) + ((y/block.getBlock().getSize().y) * (800 / block.getBlock().getSize().x)))]){
 
-                block.setBlockColors();
+                switch (block.blockColorList[(int)(((x / block.getBlock().getSize().x)) + ((y/block.getBlock().getSize().y) * (800 / block.getBlock().getSize().x)))]) {
+                    case 1:
+                        block.setBlockColors();
+                        break;
+                    case 2:
+                        block.block.setFillColor(Color(166,45,65));
+                        block.block.setOutlineColor(Color(255,255,255));
+                        break;
+                    case 3:
+                        block.block.setFillColor(Color(47,166,45));
+                        block.block.setOutlineColor(Color(255,255,255));
+                        break;
+                    case 4:
+                        block.block.setFillColor(Color(45,51,166));
+                        block.block.setOutlineColor(Color(255,255,255));
+                        break;
+                    case 5:
+                        block.block.setFillColor(Color(93,94,107));
+                        block.block.setOutlineColor(Color(255,255,255));
+                        break;
+                    case 6:
+                        block.block.setFillColor(Color(110,22,130));
+                        block.block.setOutlineColor(Color(255,255,255));
+                        break;
+                }
+
+
                 Vector2f blockPosition = Vector2f(x,y);
                 block.setBlocksPositions(blockPosition);
                 window->draw(block.getBlock());

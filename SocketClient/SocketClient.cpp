@@ -17,7 +17,7 @@ void SocketClient::conectar() {
 
     info.sin_family = AF_INET;// tipo de conexion ipv4
     info.sin_addr.s_addr = inet_addr("127.0.0.1"); //aceptamos a cualquier cliente
-    info.sin_port = ntohs(4050);//define el puerto
+    info.sin_port = ntohs(port);//define el puerto
     memset(&info.sin_zero,0,sizeof(info.sin_zero)); //limpia la estructura
 
     if(connect(descriptor,(sockaddr *)&info,(socklen_t)sizeof(info)) < 0){
@@ -68,6 +68,6 @@ const string &SocketClient::getMessageInfo() const {
     return message_info;
 }
 
-void SocketClient::setMessageInfo(const string &messageInfo) {
+void SocketClient::setMessageInfo(const string &messageInfo){
     message_info = messageInfo;
 }

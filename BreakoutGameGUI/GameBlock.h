@@ -34,6 +34,7 @@ public:
     string* wordList;
     bool* isBlock;
     int* hitsToBlock;
+    int* blockColorList;
 
     /**
      * @brief metodo encargado de ingresar todos los valores en true o en false mediante dos for.

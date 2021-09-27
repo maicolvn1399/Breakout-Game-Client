@@ -28,6 +28,7 @@ public:
     void setMessageInfo(const string &messageInfo);
 
     string message_info;
+    int port;
 
 private:
     int descriptor;

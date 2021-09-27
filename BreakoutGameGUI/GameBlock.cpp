@@ -50,6 +50,24 @@ void GameBlock::setBlockTypes(){
             hitsToBlock[i] = 0;
         }
     }
+
+    for(int i = 0; i < totalBlocks; i++){
+        if(wordList[i] == "común"){
+            blockColorList[i] = 1;
+        }else if(wordList[i] == "doble"){
+            blockColorList[i] = 2;
+        }else if(wordList[i] == "triple"){
+            blockColorList[i] = 3;
+        }else if(wordList[i] == "interno"){
+            blockColorList[i] = 4;
+        }else if(wordList[i] == "profundo"){
+            blockColorList[i] = 5;
+        }else{
+            blockColorList[i] = 6;
+        }
+
+    }
+
 }
 
 void GameBlock::setBlockColors(){
