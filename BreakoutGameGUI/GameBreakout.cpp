@@ -226,8 +226,8 @@ void GameBreakout::update(float dt) {
 
                                 cout << root["block_points"].asString() << endl;
 
-                                scoreInInterger += stoi(root["block_points"].asString());
-                                score.setString(std::to_string(scoreInInterger));
+                                //scoreInInterger += stoi(root["block_points"].asString());
+                                //score.setString(std::to_string(scoreInInterger));
 
                                 //if (blocktype == "doble") {
 
@@ -278,8 +278,8 @@ void GameBreakout::update(float dt) {
 
                             cout << root["block_points"].asString() << endl;
 
-                            scoreInInterger += stoi(root["block_points"].asString());
-                            score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += stoi(root["block_points"].asString());
+                            //score.setString(std::to_string(scoreInInterger));
 
 
                         } else if (blocktype == "interno") {
@@ -314,8 +314,8 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
 
-                            scoreInInterger += stoi(root["block_points"].asString());
-                            score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += stoi(root["block_points"].asString());
+                            //score.setString(std::to_string(scoreInInterger));
 
                         } else if (blocktype == "profundo") {
                             ballsList[i].profundidad += 1;
@@ -361,8 +361,8 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
 
-                            scoreInInterger += stoi(root["block_points"].asString());
-                            score.setString(std::to_string(scoreInInterger));
+                            //scoreInInterger += stoi(root["block_points"].asString());
+                            //score.setString(std::to_string(scoreInInterger));
                         }
                     }
                 }
