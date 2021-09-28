@@ -84,6 +84,7 @@ private:
     Font font;
     String playerName;
     int port;
+    bool rotateCondition;
     Text nombre;
     Text score;
     GameBall ball;

@@ -67,6 +67,9 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
 
     int portInInteger = stoi(portNumber);
 
+    //rotate condition
+    rotateCondition = false;
+
 
     client = new SocketClient;
     client->port = portInInteger;
@@ -120,6 +123,7 @@ void GameBreakout::update(float dt) {
 
         //Ball boundaries collision
         ball.boundariesCollision(bar);
+        bar.decreaseSize();
     }
     //Ball-Bar collision
     if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
@@ -131,12 +135,12 @@ void GameBreakout::update(float dt) {
 
         ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
         ball.speed.y = -(abs(ball.getSpeed().y));
-        //En caso de tocar la sorpresa
-    }//else if(bar.getBar().getGlobalBounds().intersects(ball.getBall().getGlobalBounds())){
 
-    //ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
-    //ball.speed.y = -(abs(ball.getSpeed().y));
-    //}
+        //En caso de tocar la sorpresa rotate
+    }else if(bar.getBar().getGlobalBounds().intersects(ball.getBall().getGlobalBounds()) and rotateCondition == true){
+        ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
+        ball.speed.y = -(abs(ball.getSpeed().y));
+    }
 
 
     //Ball-Block Collision
@@ -302,7 +306,7 @@ void GameBreakout::update(float dt) {
                         Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                         ball.setPosition(vecPosition);
                         if(ball.profundidad >= 2){
-                            block.isBlock[(int)((x + (y * 800 / block.getBlock().getSize().x)) - 27 * ball.profundidad)] = false;
+                            block.isBlock[(int)((x + (y * 800 / block.getBlock().getSize().x)) - 26 * ball.profundidad)] = false;
                             ball.speed.y = abs(ball.speed.y);
                             Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
                             ball.setPosition(vecPosition);
@@ -412,21 +416,29 @@ void GameBreakout::run() {
 
 void GameBreakout::selectSurprise() {
 
-    int number = rand()% 4 + 1;
+    int number = rand() % 5 + 1;
     cout << "selectSurprise method" << endl;
     cout << to_string(number) << endl;
 
-    if(number == 1){
+    if (number == 1) {
         //Increase bar size
         bar.increaseSize();
-    }else if(number == 2){
+        rotateCondition = false;
+    } else if (number == 2) {
         //Decrease bar size
         bar.decreaseSize();
-    }else if(number == 3){
+        rotateCondition = false;
+    } else if (number == 3) {
         //Increase velocity of ball
         ball.increaseVelocity();
+        rotateCondition = false;
+    }else if(number == 4){
+        //rotate bar
+        bar.rotateBar();
+        rotateCondition = true;
     }else{
         //Decrease velocity of ball
         ball.decreaseVelocity();
+        rotateCondition = false;
     }
 }

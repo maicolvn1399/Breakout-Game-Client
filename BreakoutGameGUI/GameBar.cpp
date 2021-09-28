@@ -49,13 +49,13 @@ void GameBar::barMove(Event e, int width, int height, RenderWindow *window) {
 
 void GameBar::increaseSize() {
     cout << "Increase bar size" << endl;
-     bar.setSize(Vector2f(bar.getSize().x + 10, bar.getSize().y));
+     bar.setSize(Vector2f(bar.getSize().x + 15, bar.getSize().y));
 }
 
 void GameBar::decreaseSize() {
     cout << "Decrease bar size" << endl;
     if(bar.getSize().x > 80){
-        bar.setSize(Vector2f(bar.getSize().x - 10, bar.getSize().y));
+        bar.setSize(Vector2f(bar.getSize().x - 15, bar.getSize().y));
     }
 
 }
