@@ -130,7 +130,7 @@ void GameBreakout::update(float dt) {
             ballsList[i].setPosition(position);
 
             //Ball boundaries collision
-            ballsList[i].boundariesCollision(bar);
+            ballsList[i].boundariesCollision(bar); //kk
             //bar.decreaseSize();
         }
     }
