@@ -32,5 +32,5 @@ if(SFML_FOUND)
     message(STATUS "SFML_VERSION: ${SFML_VERSION}")
 endif()
 
-add_executable(Breakout_Game_Client BreakoutGameGUI/main.cpp SocketClient/SocketClient.cpp SocketClient/SocketClient.h BreakoutGameGUI/GameBreakout.cpp BreakoutGameGUI/GameBreakout.h BreakoutGameGUI/GameBar.cpp BreakoutGameGUI/GameBar.h BreakoutGameGUI/GameBall.cpp BreakoutGameGUI/GameBall.h BreakoutGameGUI/GameBlock.cpp BreakoutGameGUI/GameBlock.h)
+add_executable(Breakout_Game_Client BreakoutGameGUI/main.cpp SocketClient/SocketClient.cpp SocketClient/SocketClient.h BreakoutGameGUI/GameBreakout.cpp BreakoutGameGUI/GameBreakout.h BreakoutGameGUI/GameBar.cpp BreakoutGameGUI/GameBar.h BreakoutGameGUI/GameBall.cpp BreakoutGameGUI/GameBall.h BreakoutGameGUI/GameBlock.cpp BreakoutGameGUI/GameBlock.h DataStructure/LinkedList.h DataStructure/Node.h)
 target_link_libraries (Breakout_Game_Client sfml-graphics sfml-window sfml-system sfml-network jsoncpp)

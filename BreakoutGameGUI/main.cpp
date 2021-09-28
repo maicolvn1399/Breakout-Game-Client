@@ -3,6 +3,7 @@
 #include "SocketClient/SocketClient.h"
 #include <iostream>
 #include "BreakoutGameGUI/GameBreakout.h"
+#include "DataStructure/LinkedList.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -84,6 +85,7 @@ int main(){
 
         GameBreakout game(800,600,"Breakout", name, portNumber);
         game.run();
+
 
     return 0;
 

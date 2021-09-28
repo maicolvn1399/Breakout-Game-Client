@@ -34,8 +34,6 @@ class GameBreakout{
 
 public:
 
-
-
     /**
      * @brief constructor de la clase GameBreakout, en el que se inicializan la ventana, los bloques, el puntaje, entre  otros
      * @param w, representa el ancho de la ventana del programa
@@ -95,7 +93,6 @@ private:
     Texture textureImage;
     Sprite spriteImage;
     GameBall * ballsList;
-
 
 };
 

@@ -10,8 +10,11 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "DataStructure/LinkedList.h"
+
 using namespace sf;
 using namespace std;
+
 /**
  * @file GameBlock.h
  * @authors Michael Valverde Navarro y Max Garro Mora
@@ -22,9 +25,7 @@ using namespace std;
 
 class GameBlock{
 
-
 public:
-
     /**
      * @brief constructor de la clase GameBlock
      */
@@ -35,6 +36,7 @@ public:
     bool* isBlock;
     int* hitsToBlock;
     int* blockColorList;
+
 
     /**
      * @brief metodo encargado de ingresar todos los valores en true o en false mediante dos for.
@@ -74,7 +76,6 @@ public:
 
     void setBlockColorsDoble();
 };
-
 
 
 #endif //BREAKOUT_GAME_CLIENT_GAMEBLOCK_H

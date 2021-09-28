@@ -7,7 +7,7 @@
 #include "iostream"
 
 GameBall::GameBall() {
-    ball.setRadius(6.0f);
+    ball.setRadius(5.0f);
     ball.setFillColor(Color::White);
     ball.setOutlineColor(Color::Cyan);
     ball.setOutlineThickness(1.0f);

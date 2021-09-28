@@ -15,8 +15,6 @@ bool *GameBlock::getIsBlock() const {
 
 GameBlock::GameBlock() {
 
-
-
     block.setSize(Vector2f(40, 30));
     block.setOutlineThickness(1.0f);
 }

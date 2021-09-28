@@ -5,7 +5,7 @@
 #include "SocketClient.h"
 
 
-SocketClient::SocketClient() {
+SocketClient::SocketClient(){
 
 }
 
@@ -14,7 +14,6 @@ void SocketClient::conectar() {
     descriptor = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if(descriptor < 0) //valida creación de socket
         cout << "Error al crear el socket " << endl;
-
 
 
     info.sin_family = AF_INET;// tipo de conexion ipv4
@@ -54,7 +53,6 @@ void *SocketClient::Contolador(void *obj) {
         }
         cout << mensaje << endl;
         setMessageInfo(mensaje);
-
 
         //aca se puede enviar mensajes para otra clase o para el servidor
     }
