@@ -43,6 +43,7 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     block.blockColorList = new int[block.totalBlocks];
     block.setFalseValuesToArray();
     block.setBlockTypes();
+    // $$$
 
     font.loadFromFile("../hinted-CelloSans-Regular.ttf");
     score.setFont(font);
