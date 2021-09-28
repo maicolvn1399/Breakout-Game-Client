@@ -94,6 +94,7 @@ private:
     Json::Value root;
     Texture textureImage;
     Sprite spriteImage;
+    GameBall * ballsList;
 
 
 };

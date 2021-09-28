@@ -64,6 +64,11 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     textureImage.loadFromFile("../bg_2.jpg");
     spriteImage.setTexture(textureImage);
 
+    ballsList = new GameBall[3];
+    for(int i = 0; i < 3; i++ ){
+        ballsList[i] = ball;
+    }
+
 
     int portInInteger = stoi(portNumber);
 
@@ -98,250 +103,266 @@ void GameBreakout::event() {
     bar.rotateBar();
 
     if(e.type == Event::MouseButtonPressed){
-        Vector2f position = Vector2f(
-                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius(),
-                bar.getBar().getPosition().y - bar.getBar().getSize().y);
-        ball.setPosition(position);
-        ball.angleMovement();
+        for(int i = 0; i < 3; i++){
+            Vector2f position = Vector2f(
+                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ballsList[i].getBall().getRadius(),
+                    bar.getBar().getPosition().y - bar.getBar().getSize().y);
+            ballsList[i].setPosition(position);
+            ballsList[i].angleMovement();
+        }
     }
 }
 
 void GameBreakout::update(float dt) {
 
-    if(ball.getSpeed().y == 0.0f){
-        Vector2f position = Vector2f(
-                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ball.getBall().getRadius(),
-                bar.getBar().getPosition().y - bar.getBar().getSize().y);
-        ball.setPosition(position);
+    for(int i = 0; i < 3; i++){
+        if(ballsList[i].getSpeed().y == 0.0f){
+            Vector2f position = Vector2f(
+                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ballsList[i].getBall().getRadius(),
+                    bar.getBar().getPosition().y - bar.getBar().getSize().y);
+            ballsList[i].setPosition(position);
 
-    }else{
-        Vector2f position = Vector2f(
-                ball.getBall().getPosition().x + (ball.getSpeed().x * dt),
-                ball.getBall().getPosition().y + (ball.getSpeed().y * dt)
-        );
-        ball.setPosition(position);
+        }else{
+            Vector2f position = Vector2f(
+                    ballsList[i].getBall().getPosition().x + (ballsList[i].getSpeed().x * dt),
+                    ballsList[i].getBall().getPosition().y + (ballsList[i].getSpeed().y * dt)
+            );
+            ballsList[i].setPosition(position);
 
-        //Ball boundaries collision
-        ball.boundariesCollision(bar);
-        bar.decreaseSize();
+            //Ball boundaries collision
+            ballsList[i].boundariesCollision(bar);
+            //bar.decreaseSize();
+        }
     }
     //Ball-Bar collision
-    if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
-       && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
-       && ball.getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
-       && ball.getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y)
-    {
-        ball.moveFaster();
+    for(int i = 0; i < 3; i++) {
+        if (ballsList[i].getBall().getPosition().x + (ballsList[i].getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
+            && ballsList[i].getBall().getPosition().y + (ballsList[i].getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
+            && ballsList[i].getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
+            && ballsList[i].getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y) {
+            ballsList[i].moveFaster();
 
-        ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
-        ball.speed.y = -(abs(ball.getSpeed().y));
+            ballsList[i].setPosition(Vector2f(ballsList[i].getBall().getPosition().x,
+                                      bar.getBar().getPosition().y - (ballsList[i].getBall().getRadius() * 2.0f)));
+            ballsList[i].speed.y = -(abs(ballsList[i].getSpeed().y));
 
-        //En caso de tocar la sorpresa rotate
-    }else if(bar.getBar().getGlobalBounds().intersects(ball.getBall().getGlobalBounds()) and rotateCondition == true){
-        ball.setPosition(Vector2f(ball.getBall().getPosition().x, bar.getBar().getPosition().y - (ball.getBall().getRadius() * 2.0f)));
-        ball.speed.y = -(abs(ball.getSpeed().y));
+            //En caso de tocar la sorpresa rotate
+        } else if (bar.getBar().getGlobalBounds().intersects(ballsList[i].getBall().getGlobalBounds()) and
+                   rotateCondition == true) {
+            ballsList[i].setPosition(Vector2f(ballsList[i].getBall().getPosition().x,
+                                      bar.getBar().getPosition().y - (ballsList[i].getBall().getRadius() * 2.0f)));
+            ballsList[i].speed.y = -(abs(ballsList[i].getSpeed().y));
+        }
     }
 
 
     //Ball-Block Collision
-    for(int y = 0; y < 600/block.getBlock().getSize().y; y++){
-        for(int x = 0; x < 800 / block.getBlock().getSize().x; x++){
-            if(block.isBlock[(int)(x + (y * (800 / block.getBlock().getSize().x)))]){
+    for(int i = 0; i < 3; i++) {
+        for (int y = 0; y < 600 / block.getBlock().getSize().y; y++) {
+            for (int x = 0; x < 800 / block.getBlock().getSize().x; x++) {
+                if (block.isBlock[(int) (x + (y * (800 / block.getBlock().getSize().x)))]) {
 
-                if(ball.getBall().getPosition().x + (ball.getBall().getRadius() * 2.0f) >= x * block.getBlock().getSize().x
-                   && ball.getBall().getPosition().y + (ball.getBall().getRadius() * 2.0f) >= y * block.getBlock().getSize().y
-                   && ball.getBall().getPosition().x < (x+1) * (block.getBlock().getSize().x)
-                   && ball.getBall().getPosition().y < (y+1) * (block.getBlock().getSize().y)) {
+                    if (ballsList[i].getBall().getPosition().x + (ballsList[i].getBall().getRadius() * 2.0f) >=
+                        x * block.getBlock().getSize().x
+                        && ballsList[i].getBall().getPosition().y + (ballsList[i].getBall().getRadius() * 2.0f) >=
+                           y * block.getBlock().getSize().y
+                        && ballsList[i].getBall().getPosition().x < (x + 1) * (block.getBlock().getSize().x)
+                        && ballsList[i].getBall().getPosition().y < (y + 1) * (block.getBlock().getSize().y)) {
 
-                    //Score
-                    int scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
+                        //Score
+                        int scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
 
-                    //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
-                    //dobles o triples según la cantidad de veces que la bola toque el bloques
-                    string blocktype;
+                        //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
+                        //dobles o triples según la cantidad de veces que la bola toque el bloques
+                        string blocktype;
 
-                    blocktype = block.wordList[(int) (x + (y * 800 / block.getBlock().getSize().x))];
+                        blocktype = block.wordList[(int) (x + (y * 800 / block.getBlock().getSize().x))];
 
-                    cout << blocktype << endl;
+                        cout << blocktype << endl;
 
-                    string blocktype_json = "\""+blocktype+"\"";
-                    string json_;
-                    Json::Reader reader;
+                        string blocktype_json = "\"" + blocktype + "\"";
+                        string json_;
+                        Json::Reader reader;
 
-                    json_ = "{\"info\" : " + blocktype_json+ "}";
-                    reader.parse(json_.c_str(), root);
-                    //cout << "Blocktype json: " << root["blocktype"] << endl;
-                    //cout << json_ << endl;
-                    //client->setMensaje(json_.c_str());
-                    //cout << "Client get message : " << client->getMessageInfo()<< endl;
+                        json_ = "{\"info\" : " + blocktype_json + "}";
+                        reader.parse(json_.c_str(), root);
+                        //cout << "Blocktype json: " << root["blocktype"] << endl;
+                        //cout << json_ << endl;
+                        //client->setMensaje(json_.c_str());
+                        //cout << "Client get message : " << client->getMessageInfo()<< endl;
 
-                    if (blocktype == "doble" or blocktype == "triple") {
-                        if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
+                        if (blocktype == "doble" or blocktype == "triple") {
+                            if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
+                                block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                                (y + 1) * block.getBlock().getSize().y);
+                                ballsList[i].setPosition(vecPosition);
+
+                                cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
+
+                                //Send to the server
+                                string blocktype_json = "\"" + blocktype + "\"";
+                                string json_;
+                                Json::Reader reader;
+
+                                json_ = "{\"info\" : " + blocktype_json + "}";
+                                reader.parse(json_.c_str(), root);
+                                //cout << "Blocktype json: " << root["blocktype"] << endl;
+                                //###
+                                cout << json_ << endl;
+
+                                client->setMensaje(json_.c_str());
+
+                                cout << "Client get message : " << client->getMessageInfo() << endl;
+
+                                string receivedMessage;
+
+                                receivedMessage = client->getMessageInfo();
+
+                                reader.parse(receivedMessage, root);
+
+
+                                cout << root["block_points"].asString() << endl;
+
+                                //scoreInInterger += stoi(root["block_points"].asString());
+                                //score.setString(std::to_string(scoreInInterger));
+
+                                //if (blocktype == "doble") {
+
+                                //scoreInInterger += 15;
+                                //score.setString(std::to_string(scoreInInterger));
+                                //} else {
+
+                                //scoreInInterger += 20;
+                                //score.setString(std::to_string(scoreInInterger));
+                                //}
+                            } else {
+                                block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
+                                        block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] - 1;
+                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                                (y + 1) * block.getBlock().getSize().y);
+                                ballsList[i].setPosition(vecPosition);
+                            }
+                        } else if (blocktype == "sorpresa") {
+                            selectSurprise();
                             block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
-                            ball.speed.y = abs(ball.speed.y);
-                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ball.setPosition(vecPosition);
+                            ballsList[i].setPosition(vecPosition);
 
-                            cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
+                            cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
-                            //Send to the server
-                            string blocktype_json = "\""+blocktype+"\"";
+
+                            string blocktype_json = "\"" + blocktype + "\"";
                             string json_;
                             Json::Reader reader;
 
-                            json_ = "{\"info\" : " + blocktype_json+ "}";
+                            json_ = "{\"info\" : " + blocktype_json + "}";
                             reader.parse(json_.c_str(), root);
                             //cout << "Blocktype json: " << root["blocktype"] << endl;
-                            //###
                             cout << json_ << endl;
 
                             client->setMensaje(json_.c_str());
 
-                            cout << "Client get message : " << client->getMessageInfo()<< endl;
+                            cout << "Client get message : " << client->getMessageInfo() << endl;
 
                             string receivedMessage;
 
                             receivedMessage = client->getMessageInfo();
 
-                            reader.parse(receivedMessage,root);
-
+                            reader.parse(receivedMessage, root);
 
                             cout << root["block_points"].asString() << endl;
 
                             //scoreInInterger += stoi(root["block_points"].asString());
                             //score.setString(std::to_string(scoreInInterger));
 
-                            //if (blocktype == "doble") {
 
-                            //scoreInInterger += 15;
-                            //score.setString(std::to_string(scoreInInterger));
-                            //} else {
-
-                            //scoreInInterger += 20;
-                            //score.setString(std::to_string(scoreInInterger));
-                            //}
-                        } else {
-                            block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
-                                    block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] - 1;
-                            ball.speed.y = abs(ball.speed.y);
-                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
+                        } else if (blocktype == "interno") {
+                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ball.setPosition(vecPosition);
-                        }
-                    } else if (blocktype == "sorpresa") {
-                        selectSurprise();
-                        block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
-                        ball.speed.y = abs(ball.speed.y);
-                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
-                                                        (y + 1) * block.getBlock().getSize().y);
-                        ball.setPosition(vecPosition);
+                            ballsList[i].setPosition(vecPosition);
 
-                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
+                            if (ballsList[i].profundidad > 0) {
+                                //scoreInInterger += 30;
+                                //score.setString(std::to_string(scoreInInterger));
+                                block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
 
 
-                        string blocktype_json = "\""+blocktype+"\"";
-                        string json_;
-                        Json::Reader reader;
+                            }
+                            cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
-                        json_ = "{\"info\" : " + blocktype_json+ "}";
-                        reader.parse(json_.c_str(), root);
-                        //cout << "Blocktype json: " << root["blocktype"] << endl;
-                        cout << json_ << endl;
+                            string blocktype_json = "\"" + blocktype + "\"";
+                            string json_;
+                            Json::Reader reader;
 
-                        client->setMensaje(json_.c_str());
+                            json_ = "{\"info\" : " + blocktype_json + "}";
+                            reader.parse(json_.c_str(), root);
+                            //cout << "Blocktype json: " << root["blocktype"] << endl;
+                            cout << json_ << endl;
 
-                        cout << "Client get message : " << client->getMessageInfo()<< endl;
+                            client->setMensaje(json_.c_str());
+                            cout << "Client get message : " << client->getMessageInfo() << endl;
 
-                        string receivedMessage;
+                            string receivedMessage;
+                            receivedMessage = client->getMessageInfo();
+                            reader.parse(receivedMessage, root);
+                            cout << root["block_points"].asString() << endl;
 
-                        receivedMessage = client->getMessageInfo();
-
-                        reader.parse(receivedMessage,root);
-
-                        cout << root["block_points"].asString()<< endl;
-
-                        //scoreInInterger += stoi(root["block_points"].asString());
-                        //score.setString(std::to_string(scoreInInterger));
-
-
-                    }else if(blocktype == "interno") {
-                        ball.speed.y = abs(ball.speed.y);
-                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x,
-                                                        (y + 1) * block.getBlock().getSize().y);
-                        ball.setPosition(vecPosition);
-
-                        if(ball.profundidad > 0){
-                            //scoreInInterger += 30;
+                            //scoreInInterger += stoi(root["block_points"].asString());
                             //score.setString(std::to_string(scoreInInterger));
-                            block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
 
+                        } else if (blocktype == "profundo") {
+                            ballsList[i].profundidad += 1;
+                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                            (y + 1) * block.getBlock().getSize().y);
+                            ballsList[i].setPosition(vecPosition);
+                            if (ballsList[i].profundidad >= 2) {
+                                block.isBlock[(int) ((x + (y * 800 / block.getBlock().getSize().x)) -
+                                                     26 * ballsList[i].profundidad)] = false;
+                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                                (y + 1) * block.getBlock().getSize().y);
+                                ballsList[i].setPosition(vecPosition);
+                                ballsList[i].profundidad = 0;
+                            }
+                            cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
+                        } else {
+                            block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                            block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))];
+                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
+                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                            (y + 1) * block.getBlock().getSize().y);
+                            ballsList[i].setPosition(vecPosition);
+
+                            cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
+
+                            string blocktype_json = "\"" + blocktype + "\"";
+                            string json_;
+                            Json::Reader reader;
+                            Json::Value root;
+
+                            json_ = "{\"info\" : " + blocktype_json + "}";
+                            reader.parse(json_.c_str(), root);
+                            //cout << "Blocktype json: " << root["blocktype"] << endl;
+                            cout << json_ << endl;
+                            string receivedMessage;
+                            client->setMensaje(json_.c_str());
+                            cout << "Client get message : " << client->getMessageInfo() << endl;
+                            receivedMessage = client->getMessageInfo();
+
+                            reader.parse(receivedMessage, root);
+                            cout << root["block_points"].asString() << endl;
+
+                            //scoreInInterger += stoi(root["block_points"].asString());
+                            //score.setString(std::to_string(scoreInInterger));
                         }
-                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
-
-                        string blocktype_json = "\""+blocktype+"\"";
-                        string json_;
-                        Json::Reader reader;
-
-                        json_ = "{\"info\" : " + blocktype_json+ "}";
-                        reader.parse(json_.c_str(), root);
-                        //cout << "Blocktype json: " << root["blocktype"] << endl;
-                        cout << json_ << endl;
-
-                        client->setMensaje(json_.c_str());
-                        cout << "Client get message : " << client->getMessageInfo()<< endl;
-
-                        string receivedMessage;
-                        receivedMessage = client->getMessageInfo();
-                        reader.parse(receivedMessage,root);
-                        cout << root["block_points"].asString() << endl;
-
-                        //scoreInInterger += stoi(root["block_points"].asString());
-                        //score.setString(std::to_string(scoreInInterger));
-
-                    }else if(blocktype == "profundo"){
-                        ball.profundidad += 1;
-                        ball.speed.y = abs(ball.speed.y);
-                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
-                        ball.setPosition(vecPosition);
-                        if(ball.profundidad >= 2){
-                            block.isBlock[(int)((x + (y * 800 / block.getBlock().getSize().x)) - 26 * ball.profundidad)] = false;
-                            ball.speed.y = abs(ball.speed.y);
-                            Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
-                            ball.setPosition(vecPosition);
-                            ball.profundidad = 0;
-                        }
-                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
-
-                    }else{
-                        block.isBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))] = false;
-                        block.hitsToBlock[(int)(x + (y * 800 / block.getBlock().getSize().x))];
-                        ball.speed.y = abs(ball.speed.y);
-                        Vector2f vecPosition = Vector2f(ball.getBall().getPosition().x, (y+1) * block.getBlock().getSize().y);
-                        ball.setPosition(vecPosition);
-
-                        cout << to_string((int)(x + (y * 800 / block.getBlock().getSize().x)))  << endl;
-
-                        string blocktype_json = "\""+blocktype+"\"";
-                        string json_;
-                        Json::Reader reader;
-                        Json::Value root;
-
-                        json_ = "{\"info\" : " + blocktype_json+ "}";
-                        reader.parse(json_.c_str(), root);
-                        //cout << "Blocktype json: " << root["blocktype"] << endl;
-                        cout << json_ << endl;
-                        string receivedMessage;
-                        client->setMensaje(json_.c_str());
-                        cout << "Client get message : " << client->getMessageInfo()<< endl;
-                        receivedMessage = client->getMessageInfo();
-
-                        reader.parse(receivedMessage,root);
-                        cout << root["block_points"].asString() << endl;
-
-                        //scoreInInterger += stoi(root["block_points"].asString());
-                        //score.setString(std::to_string(scoreInInterger));
                     }
                 }
             }
@@ -389,7 +410,9 @@ void GameBreakout::render() {
         }
     }
     window->draw(bar.getBar());
-    window->draw(ball.getBall());
+    for(int i = 0; i < 3; i++){
+        window->draw(ballsList[i].getBall());
+    }
     window->draw(score);
     window->draw(nombre);
 }
