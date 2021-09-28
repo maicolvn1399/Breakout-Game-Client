@@ -71,6 +71,8 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     }
 
 
+    //######
+
     int portInInteger = stoi(portNumber);
 
     //rotate condition
