@@ -46,7 +46,6 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     block.blockColorList = new int[block.totalBlocks];
     block.setFalseValuesToArray();
     block.setBlockTypes();
-    // $$$
 
 
     font.loadFromFile("../hinted-CelloSans-Regular.ttf");
@@ -66,12 +65,23 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
 
     nombre.setString(playerName);
 
+    gameCondition.setFont(font);
+    gameCondition.setOutlineThickness(2.0f);
+    gameCondition.setOutlineColor(Color::Black);
+    gameCondition.setPosition(Vector2f(400, 300));
+
+    gameCondition.setString("");
+
 
     textureImage.loadFromFile("../bg_2.jpg");
     spriteImage.setTexture(textureImage);
 
 
     gameBallsList.push_back(ball);
+
+    lifes = 3;
+
+    cantidadDeProfundos = block.getCantidadProfundos();
 
 
     //######
@@ -136,7 +146,7 @@ void GameBreakout::update(float dt) {
             gameBallsList.at(i).setPosition(position);
 
             //Ball boundaries collision
-            gameBallsList.at(i).boundariesCollision(bar); //kk
+            gameBallsList.at(i).boundariesCollision(bar, gameBallsList); //kk
             //bar.decreaseSize();
         }
     }
@@ -384,7 +394,9 @@ void GameBreakout::update(float dt) {
                             }catch (const invalid_argument &e){
                                 cout << e.what() << endl;
                             }
-
+                            if(gameBallsList.empty()){
+                                gameCondition.setString("You lost");
+                            }
                         }
                     }
                 }
@@ -438,6 +450,7 @@ void GameBreakout::render() {
     }
     window->draw(score);
     window->draw(nombre);
+    window->draw(gameCondition);
 }
 
 void GameBreakout::run() {
@@ -504,5 +517,16 @@ void GameBreakout::addNewBall(){
         gameBallsList.back().angleMovement();
 
     }
+
+}
+
+void GameBreakout::endGame() {
+    if(gameBallsList.empty()){
+
+    }
+
+}
+
+void GameBreakout::winGame() {
 
 }

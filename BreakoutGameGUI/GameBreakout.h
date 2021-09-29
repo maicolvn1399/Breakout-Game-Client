@@ -18,6 +18,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "DataStructure/LinkedList.h"
+#include <vector>
 using namespace sf;
 using namespace std;
 
@@ -79,6 +81,11 @@ public:
      */
     void addNewBall();
 
+    void endGame();
+
+
+    void winGame();
+
 private:
 
     RenderWindow* window = NULL;
@@ -89,8 +96,10 @@ private:
     String playerName;
     int port;
     bool rotateCondition;
+    //LinkedList<GameBall> * ballsList;
     Text nombre;
     Text score;
+    Text gameCondition;
     GameBall ball;
     GameBar bar;
     GameBlock block;
@@ -99,6 +108,8 @@ private:
     Texture textureImage;
     Sprite spriteImage;
     GameBall * ballsList;
+    int lifes;
+    int cantidadDeProfundos;
 
 
 };

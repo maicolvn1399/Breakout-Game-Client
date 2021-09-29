@@ -103,3 +103,12 @@ void GameBlock::setBlockColorsDoble() {
     block.setOutlineColor(Color(255,255,255));
 }
 
+int GameBlock::getCantidadProfundos() {
+    for(int i = 0; i < 160; i++){
+        if(wordList[i] == "profundo"){
+            cantidadBloquesProfundos += 1;
+        }
+    }
+    return cantidadBloquesProfundos;
+}
+

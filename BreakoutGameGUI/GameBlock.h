@@ -36,6 +36,7 @@ public:
     bool* isBlock;
     int* hitsToBlock;
     int* blockColorList;
+    int cantidadBloquesProfundos;
 
 
 
@@ -76,6 +77,8 @@ public:
     void setBlockTypes();
 
     void setBlockColorsDoble();
+
+    int getCantidadProfundos();
 };
 
 
