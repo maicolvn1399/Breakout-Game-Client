@@ -95,7 +95,6 @@ void GameBlock::setBlockColors(){
 }
 
 void GameBlock::setBlocksPositions(Vector2f positions){
-
     block.setPosition(positions);
 }
 

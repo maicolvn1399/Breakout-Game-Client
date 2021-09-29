@@ -9,9 +9,11 @@
 #include "Node.h"
 
 /**
- * @brief SimpleList class, contains de logic of the list structure.
- *
- * @tparam DATO, list data type
+ * @file LinkedList.h
+ * @authors Michael Valverde Navarro
+ * @brief Clase que contiene la lógica para implementar una lista simple enlazada
+ * @version 1.0
+ * @date 28/09/2021
  */
 
 template<class DATO>
@@ -22,13 +24,34 @@ public:
     Node<DATO> * start;
     int size = 0;
 
+    /**
+     * @brief constructor de la clase LinkedList, se instancia una lista vacía, se permite contener objetos de cualquier tipo
+     */
     LinkedList(){
         start = NULL;
     }
 
+    /**
+     * @brief permite insertar objetos nuevos a la lista
+     * @param DATO, tipo de dato que se inserta a la lista
+     */
     void insertar(DATO);
+    /**
+     * @brief revisa si la lista esta vacía
+     * @returns true si esta vacia, false en caso contrario
+     */
     bool estaVacia();
+    /**
+    * @brief permite eliminar objetos de la lista
+    * @param DATO, dato que se quiere eliminar
+    */
     void eliminar(DATO);
+
+    /**
+     * @brief obtiene un dato de la lista
+     * @param int que representa la posición que se busca obtener
+     * @returns el dato que se encuentra en el indice pasado por parametro
+     */
     DATO obtenerPos(int);
 
 };
