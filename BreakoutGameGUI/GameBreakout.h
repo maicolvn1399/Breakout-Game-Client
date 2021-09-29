@@ -69,9 +69,15 @@ public:
     void run();
 
     /**
-     * @brief metodo encargado de seleccionar aleatoriamente las sorpresas: incrementar el tamano de la barra, disminuir el tamano de la barra, auemntar la velocidad de la bola y disminuir la velocidad de la bola
+     * @brief metodo encargado de seleccionar aleatoriamente las sorpresas: incrementar el tamano de la barra, disminuir el tamano de la barra, auemntar la velocidad de la bola y disminuir la velocidad de la bola o añadir una bola nueva
      */
     void selectSurprise();
+
+    /**
+     * @brief metodo encargado de añadir una bola al juego
+     *
+     */
+    void addNewBall();
 
 private:
 
@@ -93,6 +99,7 @@ private:
     Texture textureImage;
     Sprite spriteImage;
     GameBall * ballsList;
+
 
 };
 

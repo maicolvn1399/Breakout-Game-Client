@@ -15,6 +15,7 @@ bool *GameBlock::getIsBlock() const {
 
 GameBlock::GameBlock() {
 
+
     block.setSize(Vector2f(40, 30));
     block.setOutlineThickness(1.0f);
 }
@@ -29,12 +30,33 @@ void GameBlock::setFalseValuesToArray(){
 }
 
 void GameBlock::setBlockTypes(){
-    const string words[15] = {"común","doble","triple","interno","profundo","sorpresa","común","común","común","común",
-                              "común","común","común","común","común"};
+    //const string words[15] = {"común","doble","triple","interno","profundo","sorpresa","común","común","común","común",
+                              //"común","común","común","común","común"};
+
+    LinkedList<string> *ptrWords = new LinkedList<string>();
+
+    ptrWords->insertar("común");
+    ptrWords->insertar("doble");
+    ptrWords->insertar("triple");
+    ptrWords->insertar("interno");
+    ptrWords->insertar("profundo");
+    ptrWords->insertar("sorpresa");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+    ptrWords->insertar("común");
+
+
     string word;
 
     for(int i = 0; i < totalBlocks; i++){
-        word = words[rand()%15];
+        //word = words[rand()%15];
+        word = ptrWords->obtenerPos(rand()%15);
         wordList[i] = word;
     }
 
@@ -63,7 +85,6 @@ void GameBlock::setBlockTypes(){
         }else{
             blockColorList[i] = 6;
         }
-
     }
 
 }

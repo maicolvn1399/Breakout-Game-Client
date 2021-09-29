@@ -70,7 +70,6 @@ void GameBall::increaseVelocity() {
     cout << "Increase ball velocity" << endl;
     speed.x += 2.0f;
     speed.y += 2.0f;
-
 }
 
 void GameBall::decreaseVelocity() {

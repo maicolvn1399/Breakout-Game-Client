@@ -10,12 +10,16 @@
 #include <jsoncpp/json/json.h>
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/writer.h>
+#include <vector>
+
 
 
 using namespace std;
 using namespace sf;
 
 SocketClient* client;
+vector<GameBall> gameBallsList;
+
 
 void * clientRun(void *){
     try{
@@ -27,7 +31,6 @@ void * clientRun(void *){
 }
 
 GameBreakout::GameBreakout(int w,int h, string title, string name, string portNumber) {
-
 
 
     window = new RenderWindow(VideoMode(w,h),title,Style::Close);
@@ -44,6 +47,7 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     block.setFalseValuesToArray();
     block.setBlockTypes();
     // $$$
+
 
     font.loadFromFile("../hinted-CelloSans-Regular.ttf");
     score.setFont(font);
@@ -66,10 +70,8 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     textureImage.loadFromFile("../bg_2.jpg");
     spriteImage.setTexture(textureImage);
 
-    ballsList = new GameBall[3];
-    for(int i = 0; i < 3; i++ ){
-        ballsList[i] = ball;
-    }
+
+    gameBallsList.push_back(ball);
 
 
     //######
@@ -107,71 +109,71 @@ void GameBreakout::event() {
     bar.rotateBar();
 
     if(e.type == Event::MouseButtonPressed){
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < gameBallsList.size(); i++){
             Vector2f position = Vector2f(
-                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ballsList[i].getBall().getRadius(),
+                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.at(i).getBall().getRadius(),
                     bar.getBar().getPosition().y - bar.getBar().getSize().y);
-            ballsList[i].setPosition(position);
-            ballsList[i].angleMovement();
+            gameBallsList.at(i).setPosition(position);
+            gameBallsList.at(i).angleMovement();
         }
     }
 }
 
 void GameBreakout::update(float dt) {
 
-    for(int i = 0; i < 3; i++){
-        if(ballsList[i].getSpeed().y == 0.0f){
+    for(int i = 0; i < gameBallsList.size(); i++){
+        if(gameBallsList.at(i).getSpeed().y == 0.0f){
             Vector2f position = Vector2f(
-                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - ballsList[i].getBall().getRadius(),
+                    bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.at(i).getBall().getRadius(),
                     bar.getBar().getPosition().y - bar.getBar().getSize().y);
-            ballsList[i].setPosition(position);
+            gameBallsList.at(i).setPosition(position);
 
         }else{
             Vector2f position = Vector2f(
-                    ballsList[i].getBall().getPosition().x + (ballsList[i].getSpeed().x * dt),
-                    ballsList[i].getBall().getPosition().y + (ballsList[i].getSpeed().y * dt)
+                    gameBallsList.at(i).getBall().getPosition().x + (gameBallsList.at(i).getSpeed().x * dt),
+                    gameBallsList.at(i).getBall().getPosition().y + (gameBallsList.at(i).getSpeed().y * dt)
             );
-            ballsList[i].setPosition(position);
+            gameBallsList.at(i).setPosition(position);
 
             //Ball boundaries collision
-            ballsList[i].boundariesCollision(bar); //kk
+            gameBallsList.at(i).boundariesCollision(bar); //kk
             //bar.decreaseSize();
         }
     }
     //Ball-Bar collision
-    for(int i = 0; i < 3; i++) {
-        if (ballsList[i].getBall().getPosition().x + (ballsList[i].getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
-            && ballsList[i].getBall().getPosition().y + (ballsList[i].getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
-            && ballsList[i].getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
-            && ballsList[i].getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y) {
-            ballsList[i].moveFaster();
+    for(int i = 0; i < gameBallsList.size(); i++) {
+        if (gameBallsList.at(i).getBall().getPosition().x + (gameBallsList.at(i).getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().x
+            && gameBallsList.at(i).getBall().getPosition().y + (gameBallsList.at(i).getBall().getRadius() * 2.0f) >= bar.getBar().getPosition().y
+            && gameBallsList.at(i).getBall().getPosition().x < bar.getBar().getPosition().x + bar.getBar().getSize().x
+            && gameBallsList.at(i).getBall().getPosition().y < bar.getBar().getPosition().y + bar.getBar().getSize().y) {
+            gameBallsList.at(i).moveFaster();
 
-            ballsList[i].setPosition(Vector2f(ballsList[i].getBall().getPosition().x,
-                                      bar.getBar().getPosition().y - (ballsList[i].getBall().getRadius() * 2.0f)));
-            ballsList[i].speed.y = -(abs(ballsList[i].getSpeed().y));
+            gameBallsList.at(i).setPosition(Vector2f(gameBallsList.at(i).getBall().getPosition().x,
+                                      bar.getBar().getPosition().y - (gameBallsList.at(i).getBall().getRadius() * 2.0f)));
+            gameBallsList.at(i).speed.y = -(abs(gameBallsList.at(i).getSpeed().y));
 
             //En caso de tocar la sorpresa rotate
-        } else if (bar.getBar().getGlobalBounds().intersects(ballsList[i].getBall().getGlobalBounds()) and
+        } else if (bar.getBar().getGlobalBounds().intersects(gameBallsList.at(i).getBall().getGlobalBounds()) and
                    rotateCondition == true) {
-            ballsList[i].setPosition(Vector2f(ballsList[i].getBall().getPosition().x,
-                                      bar.getBar().getPosition().y - (ballsList[i].getBall().getRadius() * 2.0f)));
-            ballsList[i].speed.y = -(abs(ballsList[i].getSpeed().y));
+            gameBallsList.at(i).setPosition(Vector2f(gameBallsList.at(i).getBall().getPosition().x,
+                                      bar.getBar().getPosition().y - (gameBallsList.at(i).getBall().getRadius() * 2.0f)));
+            gameBallsList.at(i).speed.y = -(abs(gameBallsList.at(i).getSpeed().y));
         }
     }
 
 
     //Ball-Block Collision
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < gameBallsList.size(); i++) {
         for (int y = 0; y < 600 / block.getBlock().getSize().y; y++) {
             for (int x = 0; x < 800 / block.getBlock().getSize().x; x++) {
                 if (block.isBlock[(int) (x + (y * (800 / block.getBlock().getSize().x)))]) {
 
-                    if (ballsList[i].getBall().getPosition().x + (ballsList[i].getBall().getRadius() * 2.0f) >=
+                    if (gameBallsList.at(i).getBall().getPosition().x + (gameBallsList.at(i).getBall().getRadius() * 2.0f) >=
                         x * block.getBlock().getSize().x
-                        && ballsList[i].getBall().getPosition().y + (ballsList[i].getBall().getRadius() * 2.0f) >=
+                        && gameBallsList.at(i).getBall().getPosition().y + (gameBallsList.at(i).getBall().getRadius() * 2.0f) >=
                            y * block.getBlock().getSize().y
-                        && ballsList[i].getBall().getPosition().x < (x + 1) * (block.getBlock().getSize().x)
-                        && ballsList[i].getBall().getPosition().y < (y + 1) * (block.getBlock().getSize().y)) {
+                        && gameBallsList.at(i).getBall().getPosition().x < (x + 1) * (block.getBlock().getSize().x)
+                        && gameBallsList.at(i).getBall().getPosition().y < (y + 1) * (block.getBlock().getSize().y)) {
 
                         //Score
                         int scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
@@ -198,10 +200,10 @@ void GameBreakout::update(float dt) {
                         if (blocktype == "doble" or blocktype == "triple") {
                             if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
                                 block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
-                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                                Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                                 (y + 1) * block.getBlock().getSize().y);
-                                ballsList[i].setPosition(vecPosition);
+                                gameBallsList.at(i).setPosition(vecPosition);
 
                                 cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
@@ -229,8 +231,12 @@ void GameBreakout::update(float dt) {
 
                                 cout << root["block_points"].asString() << endl;
 
-                                //scoreInInterger += stoi(root["block_points"].asString());
-                                //score.setString(std::to_string(scoreInInterger));
+                                try{
+                                    scoreInInterger += stoi(root["block_points"].asString());
+                                    score.setString(std::to_string(scoreInInterger));
+                                }catch (const invalid_argument &e){
+                                    cout << e.what() << endl;
+                                }
 
                                 //if (blocktype == "doble") {
 
@@ -244,18 +250,18 @@ void GameBreakout::update(float dt) {
                             } else {
                                 block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] =
                                         block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] - 1;
-                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                                Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                                 (y + 1) * block.getBlock().getSize().y);
-                                ballsList[i].setPosition(vecPosition);
+                                gameBallsList.at(i).setPosition(vecPosition);
                             }
                         } else if (blocktype == "sorpresa") {
                             selectSurprise();
                             block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
-                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                            gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                            Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ballsList[i].setPosition(vecPosition);
+                            gameBallsList.at(i).setPosition(vecPosition);
 
                             cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
@@ -281,17 +287,21 @@ void GameBreakout::update(float dt) {
 
                             cout << root["block_points"].asString() << endl;
 
-                            //scoreInInterger += stoi(root["block_points"].asString());
-                            //score.setString(std::to_string(scoreInInterger));
+                            try{
+                                scoreInInterger += stoi(root["block_points"].asString());
+                                score.setString(std::to_string(scoreInInterger));
+                            }catch (const invalid_argument &e){
+                                cout << e.what() << endl;
+                            }
 
 
                         } else if (blocktype == "interno") {
-                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                            gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                            Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ballsList[i].setPosition(vecPosition);
+                            gameBallsList.at(i).setPosition(vecPosition);
 
-                            if (ballsList[i].profundidad > 0) {
+                            if (gameBallsList.at(i).profundidad > 0) {
                                 //scoreInInterger += 30;
                                 //score.setString(std::to_string(scoreInInterger));
                                 block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
@@ -317,33 +327,37 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
 
-                            //scoreInInterger += stoi(root["block_points"].asString());
-                            //score.setString(std::to_string(scoreInInterger));
+                            try{
+                                scoreInInterger += stoi(root["block_points"].asString());
+                                score.setString(std::to_string(scoreInInterger));
+                            }catch (const invalid_argument &e){
+                                cout << e.what() << endl;
+                            }
 
                         } else if (blocktype == "profundo") {
-                            ballsList[i].profundidad += 1;
-                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                            gameBallsList.at(i).profundidad += 1;
+                            gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                            Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ballsList[i].setPosition(vecPosition);
-                            if (ballsList[i].profundidad >= 2) {
+                            gameBallsList.at(i).setPosition(vecPosition);
+                            if (gameBallsList.at(i).profundidad >= 2) {
                                 block.isBlock[(int) ((x + (y * 800 / block.getBlock().getSize().x)) -
-                                                     26 * ballsList[i].profundidad)] = false;
-                                ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                                Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                                                     26 * gameBallsList.at(i).profundidad)] = false;
+                                gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                                Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                                 (y + 1) * block.getBlock().getSize().y);
-                                ballsList[i].setPosition(vecPosition);
-                                ballsList[i].profundidad = 0;
+                                gameBallsList.at(i).setPosition(vecPosition);
+                                gameBallsList.at(i).profundidad = 0;
                             }
                             cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
                         } else {
                             block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
                             block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))];
-                            ballsList[i].speed.y = abs(ballsList[i].speed.y);
-                            Vector2f vecPosition = Vector2f(ballsList[i].getBall().getPosition().x,
+                            gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
+                            Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
-                            ballsList[i].setPosition(vecPosition);
+                            gameBallsList.at(i).setPosition(vecPosition);
 
                             cout << to_string((int) (x + (y * 800 / block.getBlock().getSize().x))) << endl;
 
@@ -364,8 +378,13 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
 
-                            //scoreInInterger += stoi(root["block_points"].asString());
-                            //score.setString(std::to_string(scoreInInterger));
+                            try{
+                                scoreInInterger += stoi(root["block_points"].asString());
+                                score.setString(std::to_string(scoreInInterger));
+                            }catch (const invalid_argument &e){
+                                cout << e.what() << endl;
+                            }
+
                         }
                     }
                 }
@@ -414,8 +433,8 @@ void GameBreakout::render() {
         }
     }
     window->draw(bar.getBar());
-    for(int i = 0; i < 3; i++){
-        window->draw(ballsList[i].getBall());
+    for(int i = 0; i < gameBallsList.size(); i++){
+        window->draw(gameBallsList.at(i).getBall());
     }
     window->draw(score);
     window->draw(nombre);
@@ -443,7 +462,7 @@ void GameBreakout::run() {
 
 void GameBreakout::selectSurprise() {
 
-    int number = rand() % 5 + 1;
+    int number = rand() % 6 + 1;
     cout << "selectSurprise method" << endl;
     cout << to_string(number) << endl;
 
@@ -463,9 +482,27 @@ void GameBreakout::selectSurprise() {
         //rotate bar
         bar.rotateBar();
         rotateCondition = true;
-    }else{
+    }else if(number == 5){
         //Decrease velocity of ball
         ball.decreaseVelocity();
         rotateCondition = false;
+    }else{
+
+        //Add new ball to game
+        cout << "New ball added" << endl;
+        addNewBall();
     }
+}
+
+void GameBreakout::addNewBall(){
+    if(gameBallsList.size() < 3){
+        gameBallsList.push_back(ball);
+        Vector2f position = Vector2f(
+                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.back().getBall().getRadius(),
+                bar.getBar().getPosition().y - bar.getBar().getSize().y);
+        gameBallsList.back().setPosition(position);
+        gameBallsList.back().angleMovement();
+
+    }
+
 }

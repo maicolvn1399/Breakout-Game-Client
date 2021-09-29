@@ -38,6 +38,7 @@ public:
     int* blockColorList;
 
 
+
     /**
      * @brief metodo encargado de ingresar todos los valores en true o en false mediante dos for.
      */
