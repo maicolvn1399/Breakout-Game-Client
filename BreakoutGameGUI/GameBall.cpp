@@ -63,6 +63,14 @@ void GameBall::boundariesCollision(GameBar bar, vector<GameBall> gameBalls) {
         ball.setPosition(Vector2f(bar.getBar().getPosition().x, bar.getBar().getPosition().y));
         //speed.y = -abs(speed.y);
         gameBalls.pop_back();
+        cout << "Verificando lista:" << gameBalls.size() << endl;
+        if(gameBalls.empty()){
+            //ball.setPosition(Vector2f(0, 500));
+            speed.x = 0.f;
+            speed.y = 0.f;
+            //ball.setFillColor(Color::Transparent);
+            //ball.setOutlineColor(Color::Transparent);
+        }
     }
 }
 

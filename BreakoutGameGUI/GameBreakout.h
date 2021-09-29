@@ -100,6 +100,10 @@ private:
     Text nombre;
     Text score;
     Text gameCondition;
+    Clock clock;
+    Time timeElapsed1;
+    Time t1;
+    int timeBallSpawn;
     GameBall ball;
     GameBar bar;
     GameBlock block;
