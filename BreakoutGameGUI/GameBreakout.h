@@ -110,6 +110,7 @@ private:
     GameBall * ballsList;
     int lifes;
     int cantidadDeProfundos;
+    int cantidadTotalBloques;
 
 
 };

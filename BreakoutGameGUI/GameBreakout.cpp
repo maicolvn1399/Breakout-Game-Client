@@ -83,6 +83,8 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
 
     cantidadDeProfundos = block.getCantidadProfundos();
 
+    cantidadTotalBloques = 0;
+
 
     //######
 
@@ -210,6 +212,7 @@ void GameBreakout::update(float dt) {
                         if (blocktype == "doble" or blocktype == "triple") {
                             if (block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] <= 0) {
                                 block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                                cantidadTotalBloques += 1;
                                 gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                                 Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                                 (y + 1) * block.getBlock().getSize().y);
@@ -268,6 +271,7 @@ void GameBreakout::update(float dt) {
                         } else if (blocktype == "sorpresa") {
                             selectSurprise();
                             block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                            cantidadTotalBloques += 1;
                             gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                             Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                             (y + 1) * block.getBlock().getSize().y);
@@ -315,6 +319,7 @@ void GameBreakout::update(float dt) {
                                 //scoreInInterger += 30;
                                 //score.setString(std::to_string(scoreInInterger));
                                 block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                                cantidadTotalBloques += 1;
 
 
                             }
@@ -353,6 +358,7 @@ void GameBreakout::update(float dt) {
                             if (gameBallsList.at(i).profundidad >= 2) {
                                 block.isBlock[(int) ((x + (y * 800 / block.getBlock().getSize().x)) -
                                                      26 * gameBallsList.at(i).profundidad)] = false;
+                                cantidadTotalBloques += 1;
                                 gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                                 Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                                                 (y + 1) * block.getBlock().getSize().y);
@@ -363,6 +369,7 @@ void GameBreakout::update(float dt) {
 
                         } else {
                             block.isBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))] = false;
+                            cantidadTotalBloques += 1;
                             block.hitsToBlock[(int) (x + (y * 800 / block.getBlock().getSize().x))];
                             gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                             Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
@@ -396,6 +403,9 @@ void GameBreakout::update(float dt) {
                             }
                             if(gameBallsList.empty()){
                                 gameCondition.setString("You lost");
+                            }
+                            if(cantidadTotalBloques == 160 - cantidadDeProfundos and not gameBallsList.empty()){
+                                gameCondition.setString("You win");
                             }
                         }
                     }
@@ -508,7 +518,7 @@ void GameBreakout::selectSurprise() {
 }
 
 void GameBreakout::addNewBall(){
-    if(gameBallsList.size() < 3){
+    if(gameBallsList.size() < 5){
         gameBallsList.push_back(ball);
         Vector2f position = Vector2f(
                 bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.back().getBall().getRadius(),
