@@ -56,7 +56,6 @@ void GameBlock::setBlockTypes(){
     string word;
 
     for(int i = 0; i < totalBlocks; i++){
-        //word = words[rand()%15];
         word = ptrWords->obtenerPos(rand()%17);
         wordList[i] = word;
     }

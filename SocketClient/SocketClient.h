@@ -19,7 +19,7 @@ using namespace std;
 
 /**
  * @file GameBall.h
- * @authors Michael Valverde Navarro y Max Garro Mora
+ * @authors Michael Valverde Navarro
  * @brief Clase que se encarga de ser el cliente y usa sockets para establecer comunicación con el server
  * @version 1.0
  * @date 4/09/2021
