@@ -46,7 +46,7 @@ const Vector2f &GameBall::getSpeed() const {
     return speed;
 }
 
-void GameBall::boundariesCollision(GameBar bar, vector<GameBall> gameBalls) {
+void GameBall::boundariesCollision(GameBar bar, vector<GameBall>& gameBalls) {
 
     if(ball.getPosition().x <= 0.0f){
         ball.setPosition(Vector2f(0.0f,ball.getPosition().y));

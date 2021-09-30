@@ -50,13 +50,14 @@ void GameBlock::setBlockTypes(){
     ptrWords->insertar("común");
     ptrWords->insertar("común");
     ptrWords->insertar("común");
-
+    ptrWords->insertar("sorpresa");
+    ptrWords->insertar("sorpresa");
 
     string word;
 
     for(int i = 0; i < totalBlocks; i++){
         //word = words[rand()%15];
-        word = ptrWords->obtenerPos(rand()%15);
+        word = ptrWords->obtenerPos(rand()%17);
         wordList[i] = word;
     }
 
@@ -86,7 +87,6 @@ void GameBlock::setBlockTypes(){
             blockColorList[i] = 6;
         }
     }
-
 }
 
 void GameBlock::setBlockColors(){
@@ -98,10 +98,6 @@ void GameBlock::setBlocksPositions(Vector2f positions){
     block.setPosition(positions);
 }
 
-void GameBlock::setBlockColorsDoble() {
-    block.setFillColor(Color(235,174,52));
-    block.setOutlineColor(Color(255,255,255));
-}
 
 int GameBlock::getCantidadProfundos() {
     for(int i = 0; i < 160; i++){

@@ -81,10 +81,12 @@ public:
      */
     void addNewBall();
 
-    void endGame();
+    /**
+     * @brief verifica si el jugador gana o pierde el juego
+     *
+     */
+    void checkWinOrLose();
 
-
-    void winGame();
 
 private:
 
@@ -115,7 +117,6 @@ private:
     int lifes;
     int cantidadDeProfundos;
     int cantidadTotalBloques;
-
 
 };
 

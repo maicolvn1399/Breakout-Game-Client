@@ -19,8 +19,11 @@ using namespace sf;
 
 SocketClient* client;
 vector<GameBall> gameBallsList;
+vector<GameBall>& refGameBallsList = gameBallsList;
 
 int scoreInInterger;
+int ballCounter;
+int lives;
 
 
 void * clientRun(void *){
@@ -70,7 +73,7 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     gameCondition.setFont(font);
     gameCondition.setOutlineThickness(2.0f);
     gameCondition.setOutlineColor(Color::Black);
-    gameCondition.setPosition(Vector2f(400, 300));
+    gameCondition.setPosition(Vector2f(325, 300));
 
     gameCondition.setString("");
 
@@ -80,21 +83,13 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
 
 
     gameBallsList.push_back(ball);
-    cout << "Verificando lista al inicio:" << gameBallsList.size() << endl;
+    ballCounter = 1;
 
     lifes = 3;
 
     cantidadDeProfundos = block.getCantidadProfundos();
 
     cantidadTotalBloques = 0;
-
-    Clock clock;
-
-    timeElapsed1 = clock.getElapsedTime();
-
-    t1 = seconds(5.f);
-
-    //timeBallSpawn = t1;
 
 
     //######
@@ -144,12 +139,15 @@ void GameBreakout::event() {
 
 void GameBreakout::update(float dt) {
 
+
+
     for(int i = 0; i < gameBallsList.size(); i++){
         if(gameBallsList.at(i).getSpeed().y == 0.0f){
             Vector2f position = Vector2f(
                     bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.at(i).getBall().getRadius(),
                     bar.getBar().getPosition().y - bar.getBar().getSize().y);
             gameBallsList.at(i).setPosition(position);
+
 
         }else{
             Vector2f position = Vector2f(
@@ -159,7 +157,9 @@ void GameBreakout::update(float dt) {
             gameBallsList.at(i).setPosition(position);
 
             //Ball boundaries collision
-            gameBallsList.at(i).boundariesCollision(bar, gameBallsList); //kk
+            gameBallsList.at(i).boundariesCollision(bar, refGameBallsList);
+            checkWinOrLose();
+
             //bar.decreaseSize();
         }
     }
@@ -200,7 +200,6 @@ void GameBreakout::update(float dt) {
 
                         //Score
                         scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
-
 
                         //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
                         //dobles o triples según la cantidad de veces que la bola toque el bloques
@@ -262,7 +261,6 @@ void GameBreakout::update(float dt) {
                                 }catch (const invalid_argument &e){
                                     cout << e.what() << endl;
                                 }
-
 
                                 //if (blocktype == "doble") {
 
@@ -363,6 +361,7 @@ void GameBreakout::update(float dt) {
                             }
 
                         } else if (blocktype == "profundo") {
+
                             gameBallsList.at(i).profundidad += 1;
                             gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                             Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
@@ -415,16 +414,8 @@ void GameBreakout::update(float dt) {
                                 cout << e.what() << endl;
                             }
 
-                            if(gameBallsList.empty()){
-                                gameCondition.setString("You lost");
-                            }
-                            if(cantidadTotalBloques == 160 - cantidadDeProfundos and not gameBallsList.empty()){
-                                gameCondition.setString("You win");
-                            }
+
                         }
-                        //clock.restart();
-                        //addNewBall();
-                        //cout << "tiempo transcurrido" << timeElapsed1.asSeconds() << endl;
                     }
                 }
             }
@@ -502,7 +493,7 @@ void GameBreakout::run() {
 
 void GameBreakout::selectSurprise() {
 
-    int number = rand() % 6 + 1;
+    int number = rand() % 5 + 1;
     cout << "selectSurprise method" << endl;
     cout << to_string(number) << endl;
 
@@ -530,28 +521,18 @@ void GameBreakout::selectSurprise() {
 }
 
 void GameBreakout::addNewBall(){
-    if(gameBallsList.size() < 5){
-        if(timeElapsed1 == t1) {
-            gameBallsList.push_back(ball);
-            Vector2f position = Vector2f(
-                    bar.getBar().getPosition().x + (bar.getBar().getSize().x / 2) -
-                    gameBallsList.back().getBall().getRadius(),
-                    bar.getBar().getPosition().y - bar.getBar().getSize().y);
-            gameBallsList.back().setPosition(position);
-            gameBallsList.back().angleMovement();
-            clock.restart();
-        }
-    }
-
+    gameBallsList.push_back(ball);
+    Vector2f position = Vector2f(
+            bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.back().getBall().getRadius(),
+            bar.getBar().getPosition().y - bar.getBar().getSize().y);
+    gameBallsList.back().setPosition(position);
+    gameBallsList.back().angleMovement();
 }
 
-void GameBreakout::endGame() {
+void GameBreakout::checkWinOrLose() {
     if(gameBallsList.empty()){
-
+        gameCondition.setString("You lost! :(");
+    }else if(cantidadTotalBloques == 160 - cantidadDeProfundos and not gameBallsList.empty()){
+        gameCondition.setString("You win!!!");
     }
-
-}
-
-void GameBreakout::winGame() {
-
 }
