@@ -33,6 +33,8 @@ void GameBlock::setBlockTypes(){
     //const string words[15] = {"común","doble","triple","interno","profundo","sorpresa","común","común","común","común",
                               //"común","común","común","común","común"};
 
+
+
     LinkedList<string> *ptrWords = new LinkedList<string>();
 
     ptrWords->insertar("común");

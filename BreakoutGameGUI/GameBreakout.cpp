@@ -331,6 +331,8 @@ void GameBreakout::update(float dt) {
                             addNewBall(statusBall);
 
 
+
+
                         } else if (blocktype == "interno") {
                             gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                             Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,

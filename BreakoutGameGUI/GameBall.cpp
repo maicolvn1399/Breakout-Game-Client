@@ -34,6 +34,8 @@ void GameBall::angleMovement() {
     speed.y = sin(angle) * defaultSpeed;
 }
 
+
+
 float GameBall::getDefaultSpeed() const {
     return defaultSpeed;
 }
