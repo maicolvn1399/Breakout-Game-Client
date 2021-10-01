@@ -59,7 +59,7 @@ public:
      * @brief metodo encargado de establecer la accion que hara la bola cuando haya colisionado en cierto lugar de la pantalla
      * @param bar, se le ingresa la barra para que establezca sus limites
      */
-    void boundariesCollision(GameBar bar, vector<GameBall>& gameBalls);
+    void boundariesCollision(GameBar bar, vector<GameBall>& gameBalls, GameBar &refBar);
 
     /**
      * @brief metodo encargado de aumentar en 2 a la velocidad

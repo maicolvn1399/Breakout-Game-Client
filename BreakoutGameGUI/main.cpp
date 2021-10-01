@@ -74,7 +74,7 @@ int main(){
         //game.render();
 
         string name;
-        cout << "Ingrese su nombre:";
+        cout << "Ingrese su nombre: ";
         getline(cin, name);
 
         string portNumber;

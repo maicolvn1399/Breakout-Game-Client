@@ -54,10 +54,9 @@ void GameBar::increaseSize() {
 
 void GameBar::decreaseSize() {
     cout << "Decrease bar size" << endl;
-    if(bar.getSize().x > 80){
+    if(bar.getSize().x > 70){
         bar.setSize(Vector2f(bar.getSize().x - 15, bar.getSize().y));
     }
-
 }
 
 /*
@@ -75,6 +74,8 @@ void GameBar::rotateBar() {
  */
 
 void GameBar::rotateBar() {
+    cout << "******Rotate bar*******" << endl;
+
     if(Keyboard::isKeyPressed(Keyboard::A)){
         bar.rotate(-10.f);
     }else if(Keyboard::isKeyPressed(Keyboard::D)){
@@ -82,4 +83,5 @@ void GameBar::rotateBar() {
     }else{
         bar.setRotation(0.f);
     }
+
 }

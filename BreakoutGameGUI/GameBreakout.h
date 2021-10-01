@@ -117,7 +117,6 @@ private:
     int lifes;
     int cantidadDeProfundos;
     int cantidadTotalBloques;
-
 };
 
 #endif //BREAKOUT_GAME_CLIENT_GAMEBREAKOUT_H

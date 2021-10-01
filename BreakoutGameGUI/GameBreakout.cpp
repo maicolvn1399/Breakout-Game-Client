@@ -92,8 +92,6 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     cantidadTotalBloques = 0;
 
 
-    //######
-
     int portInInteger = stoi(portNumber);
 
     //rotate condition
@@ -146,7 +144,6 @@ void GameBreakout::update(float dt) {
                     bar.getBar().getPosition().y - bar.getBar().getSize().y);
             gameBallsList.at(i).setPosition(position);
 
-
         }else{
             Vector2f position = Vector2f(
                     gameBallsList.at(i).getBall().getPosition().x + (gameBallsList.at(i).getSpeed().x * dt),
@@ -155,10 +152,9 @@ void GameBreakout::update(float dt) {
             gameBallsList.at(i).setPosition(position);
 
             //Ball boundaries collision
-            gameBallsList.at(i).boundariesCollision(bar, refGameBallsList);
+            GameBar &refBar = bar;
+            gameBallsList.at(i).boundariesCollision(bar, refGameBallsList, refBar);
             checkWinOrLose();
-
-            //bar.decreaseSize();
         }
     }
     //Ball-Bar collision
@@ -392,7 +388,7 @@ void GameBreakout::update(float dt) {
                             gameBallsList.at(i).setPosition(vecPosition);
                             if (gameBallsList.at(i).profundidad >= 2) {
                                 block.isBlock[(int) ((x + (y * 800 / block.getBlock().getSize().x)) -
-                                                     26 * gameBallsList.at(i).profundidad)] = false;
+                                                     27 * gameBallsList.at(i).profundidad)] = false;
                                 cantidadTotalBloques += 1;
                                 gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                                 Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,

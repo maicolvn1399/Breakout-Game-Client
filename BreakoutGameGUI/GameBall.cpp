@@ -46,7 +46,7 @@ const Vector2f &GameBall::getSpeed() const {
     return speed;
 }
 
-void GameBall::boundariesCollision(GameBar bar, vector<GameBall>& gameBalls) {
+void GameBall::boundariesCollision(GameBar bar, vector<GameBall>& gameBalls, GameBar& refBar) {
 
     if(ball.getPosition().x <= 0.0f){
         ball.setPosition(Vector2f(0.0f,ball.getPosition().y));
@@ -63,6 +63,7 @@ void GameBall::boundariesCollision(GameBar bar, vector<GameBall>& gameBalls) {
         ball.setPosition(Vector2f(bar.getBar().getPosition().x, bar.getBar().getPosition().y));
         //speed.y = -abs(speed.y);
         gameBalls.pop_back();
+        refBar.decreaseSize();
         cout << "Verificando lista:" << gameBalls.size() << endl;
         if(gameBalls.empty()){
             //ball.setPosition(Vector2f(0, 500));
