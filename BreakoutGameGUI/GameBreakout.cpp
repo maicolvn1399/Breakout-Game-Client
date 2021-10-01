@@ -24,6 +24,8 @@ vector<GameBall>& refGameBallsList = gameBallsList;
 int scoreInInterger;
 int ballCounter;
 int lives;
+bool rotateBarBool;
+bool & booleanRef  =  rotateBarBool;
 
 
 void * clientRun(void *){
@@ -122,7 +124,7 @@ void GameBreakout::event() {
             bar.bar.setPosition(Vector2f(800 - bar.bar.getSize().x, bar.bar.getPosition().y));
     }
 
-    bar.rotateBar();
+    bar.rotateBar(rotateBarBool);
 
     if(e.type == Event::MouseButtonPressed){
         for(int i = 0; i < gameBallsList.size(); i++){
@@ -170,8 +172,7 @@ void GameBreakout::update(float dt) {
             gameBallsList.at(i).speed.y = -(abs(gameBallsList.at(i).getSpeed().y));
 
             //En caso de tocar la sorpresa rotate
-        } else if (bar.getBar().getGlobalBounds().intersects(gameBallsList.at(i).getBall().getGlobalBounds()) and
-                   rotateCondition == true) {
+        } else if (bar.getBar().getGlobalBounds().intersects(gameBallsList.at(i).getBall().getGlobalBounds()) and rotateBarBool == true) {
             gameBallsList.at(i).setPosition(Vector2f(gameBallsList.at(i).getBall().getPosition().x,
                                       bar.getBar().getPosition().y - (gameBallsList.at(i).getBall().getRadius() * 2.0f)));
             gameBallsList.at(i).speed.y = -(abs(gameBallsList.at(i).getSpeed().y));
@@ -541,8 +542,8 @@ void GameBreakout::selectSurprise() {
         rotateCondition = false;
     }else if(number == 4){
         //rotate bar
-        bar.rotateBar();
-        rotateCondition = true;
+        //bar.rotateBar(rotateBarBool);
+        //rotateCondition = true;
     }else if(number == 5){
         //Decrease velocity of ball
         ball.decreaseVelocity();

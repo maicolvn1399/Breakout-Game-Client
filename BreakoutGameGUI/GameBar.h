@@ -64,7 +64,7 @@ public:
     /**
      * @brief metodo encargado de rotar la barra hacia la izquierda con el boton A y se mueve a la derecha con el boton D.
      */
-    void rotateBar();
+    void rotateBar(bool & rotateBarBool);
 };
 
 

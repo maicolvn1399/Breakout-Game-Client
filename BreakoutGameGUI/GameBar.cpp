@@ -59,29 +59,19 @@ void GameBar::decreaseSize() {
     }
 }
 
-/*
-void GameBar::rotateBar() {
-    int contador = 0;
-    //if(Keyboard::isKeyPressed(Keyboard::A)){
-        //contador += 1;
-        //if(contador <= 1){
-            //bar.setRotation(-20.f);
-        //}else{
-            //bar.setRotation(0.f);
-            //contador = 0;
-        //}
-}
- */
 
-void GameBar::rotateBar() {
-    cout << "******Rotate bar*******" << endl;
+void GameBar::rotateBar(bool & rotateBarBool) {
+    //cout << "******Rotate bar*******" << endl;
 
     if(Keyboard::isKeyPressed(Keyboard::A)){
         bar.rotate(-10.f);
+        rotateBarBool = true;
     }else if(Keyboard::isKeyPressed(Keyboard::D)){
         bar.rotate(10.f);
+        rotateBarBool = true;
     }else{
         bar.setRotation(0.f);
+        rotateBarBool = false;
     }
 
 
