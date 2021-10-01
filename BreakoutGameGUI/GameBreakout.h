@@ -79,12 +79,14 @@ public:
      * @brief metodo encargado de añadir una bola al juego
      *
      */
-    void addNewBall();
+    void addNewBall(string newBall);
 
-    void endGame();
+    /**
+     * @brief verifica si el jugador gana o pierde el juego
+     * @param newBall string que determina si se añade una nueva bola al juego
+     */
+    void checkWinOrLose();
 
-
-    void winGame();
 
 private:
 
@@ -115,7 +117,6 @@ private:
     int lifes;
     int cantidadDeProfundos;
     int cantidadTotalBloques;
-
 
 };
 

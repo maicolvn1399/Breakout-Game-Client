@@ -76,8 +76,9 @@ public:
      */
     void setBlockTypes();
 
-    void setBlockColorsDoble();
-
+    /**
+     * @brief obtiene cantidad de bloques profundos
+     */
     int getCantidadProfundos();
 };
 

@@ -19,8 +19,11 @@ using namespace sf;
 
 SocketClient* client;
 vector<GameBall> gameBallsList;
+vector<GameBall>& refGameBallsList = gameBallsList;
 
 int scoreInInterger;
+int ballCounter;
+int lives;
 
 
 void * clientRun(void *){
@@ -70,7 +73,7 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
     gameCondition.setFont(font);
     gameCondition.setOutlineThickness(2.0f);
     gameCondition.setOutlineColor(Color::Black);
-    gameCondition.setPosition(Vector2f(400, 300));
+    gameCondition.setPosition(Vector2f(325, 300));
 
     gameCondition.setString("");
 
@@ -80,21 +83,13 @@ GameBreakout::GameBreakout(int w,int h, string title, string name, string portNu
 
 
     gameBallsList.push_back(ball);
-    cout << "Verificando lista al inicio:" << gameBallsList.size() << endl;
+    ballCounter = 1;
 
     lifes = 3;
 
     cantidadDeProfundos = block.getCantidadProfundos();
 
     cantidadTotalBloques = 0;
-
-    Clock clock;
-
-    timeElapsed1 = clock.getElapsedTime();
-
-    t1 = seconds(5.f);
-
-    //timeBallSpawn = t1;
 
 
     //######
@@ -151,6 +146,7 @@ void GameBreakout::update(float dt) {
                     bar.getBar().getPosition().y - bar.getBar().getSize().y);
             gameBallsList.at(i).setPosition(position);
 
+
         }else{
             Vector2f position = Vector2f(
                     gameBallsList.at(i).getBall().getPosition().x + (gameBallsList.at(i).getSpeed().x * dt),
@@ -159,7 +155,9 @@ void GameBreakout::update(float dt) {
             gameBallsList.at(i).setPosition(position);
 
             //Ball boundaries collision
-            gameBallsList.at(i).boundariesCollision(bar, gameBallsList); //kk
+            gameBallsList.at(i).boundariesCollision(bar, refGameBallsList);
+            checkWinOrLose();
+
             //bar.decreaseSize();
         }
     }
@@ -201,7 +199,6 @@ void GameBreakout::update(float dt) {
                         //Score
                         scoreInInterger = std::stoi(((std::string) (score.getString())).c_str());
 
-
                         //determina el tipo de bloque con el que choca la bola y determina si lo quita si son bloques
                         //dobles o triples según la cantidad de veces que la bola toque el bloques
                         string blocktype;
@@ -236,8 +233,11 @@ void GameBreakout::update(float dt) {
                                 string blocktype_json = "\"" + blocktype + "\"";
                                 string json_;
                                 Json::Reader reader;
+                                string score_json = "\"" + to_string(scoreInInterger) + "\"";
 
-                                json_ = "{\"info\" : " + blocktype_json + "}";
+                                json_ = "{\"info\":" + blocktype_json + "," + "\"score\":" + score_json + "}";
+                                cout << "JSON: "<< json_ << endl;
+
                                 reader.parse(json_.c_str(), root);
                                 //cout << "Blocktype json: " << root["blocktype"] << endl;
                                 //###
@@ -253,8 +253,8 @@ void GameBreakout::update(float dt) {
 
                                 reader.parse(receivedMessage, root);
 
-
                                 cout << root["block_points"].asString() << endl;
+                                //cout << "New Ball status: "<< root["balls"].asString() << endl;
 
                                 try{
                                     scoreInInterger += stoi(root["block_points"].asString());
@@ -262,6 +262,11 @@ void GameBreakout::update(float dt) {
                                 }catch (const invalid_argument &e){
                                     cout << e.what() << endl;
                                 }
+
+                                //cout << "New Ball status: "<< root["balls"].asString() << endl;
+                                string statusBall = root["balls"].asString();
+                                addNewBall(statusBall);
+
 
 
                                 //if (blocktype == "doble") {
@@ -297,7 +302,10 @@ void GameBreakout::update(float dt) {
                             string json_;
                             Json::Reader reader;
 
-                            json_ = "{\"info\" : " + blocktype_json + "}";
+                            string score_json = "\"" + to_string(scoreInInterger) + "\"";
+
+                            json_ = "{\"info\":" + blocktype_json + "," + "\"score\":" + score_json + "}";
+                            cout << "JSON: "<< json_ << endl;
                             reader.parse(json_.c_str(), root);
                             //cout << "Blocktype json: " << root["blocktype"] << endl;
                             cout << json_ << endl;
@@ -313,6 +321,7 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
 
                             cout << root["block_points"].asString() << endl;
+                            //cout << "New Ball status: "<< root["balls"].asString() << endl;
 
                             try{
                                 scoreInInterger += stoi(root["block_points"].asString());
@@ -320,6 +329,10 @@ void GameBreakout::update(float dt) {
                             }catch (const invalid_argument &e){
                                 cout << e.what() << endl;
                             }
+
+                            //cout << "New Ball status: "<< root["balls"].asString() << endl;
+                            string statusBall = root["balls"].asString();
+                            addNewBall(statusBall);
 
 
                         } else if (blocktype == "interno") {
@@ -341,8 +354,10 @@ void GameBreakout::update(float dt) {
                             string blocktype_json = "\"" + blocktype + "\"";
                             string json_;
                             Json::Reader reader;
+                            string score_json = "\"" + to_string(scoreInInterger) + "\"";
 
-                            json_ = "{\"info\" : " + blocktype_json + "}";
+                            json_ = "{\"info\":" + blocktype_json + "," + "\"score\":" + score_json + "}";
+                            cout << "JSON: "<< json_ << endl;
                             reader.parse(json_.c_str(), root);
                             //cout << "Blocktype json: " << root["blocktype"] << endl;
                             cout << json_ << endl;
@@ -354,6 +369,7 @@ void GameBreakout::update(float dt) {
                             receivedMessage = client->getMessageInfo();
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
+                            //cout << "New Ball status: "<< root["balls"].asString() << endl;
 
                             try{
                                 scoreInInterger += stoi(root["block_points"].asString());
@@ -362,7 +378,13 @@ void GameBreakout::update(float dt) {
                                 cout << e.what() << endl;
                             }
 
+                            //cout << "New Ball status: "<< root["balls"].asString() << endl;
+                            string statusBall = root["balls"].asString();
+                            addNewBall(statusBall);
+
+
                         } else if (blocktype == "profundo") {
+
                             gameBallsList.at(i).profundidad += 1;
                             gameBallsList.at(i).speed.y = abs(gameBallsList.at(i).speed.y);
                             Vector2f vecPosition = Vector2f(gameBallsList.at(i).getBall().getPosition().x,
@@ -396,7 +418,11 @@ void GameBreakout::update(float dt) {
                             Json::Reader reader;
                             Json::Value root;
 
-                            json_ = "{\"info\" : " + blocktype_json + "}";
+                            string score_json = "\"" + to_string(scoreInInterger) + "\"";
+
+                            json_ = "{\"info\":" + blocktype_json + "," + "\"score\":" + score_json + "}";
+                            cout << "JSON: "<< json_ << endl;
+
                             reader.parse(json_.c_str(), root);
                             //cout << "Blocktype json: " << root["blocktype"] << endl;
                             cout << json_ << endl;
@@ -408,6 +434,7 @@ void GameBreakout::update(float dt) {
                             reader.parse(receivedMessage, root);
                             cout << root["block_points"].asString() << endl;
 
+
                             try{
                                 scoreInInterger += stoi(root["block_points"].asString());
                                 score.setString(std::to_string(scoreInInterger));
@@ -415,16 +442,12 @@ void GameBreakout::update(float dt) {
                                 cout << e.what() << endl;
                             }
 
-                            if(gameBallsList.empty()){
-                                gameCondition.setString("You lost");
-                            }
-                            if(cantidadTotalBloques == 160 - cantidadDeProfundos and not gameBallsList.empty()){
-                                gameCondition.setString("You win");
-                            }
+                            //cout << "New Ball status: "<< root["balls"].asString() << endl;
+                            string statusBall = root["balls"].asString();
+                            addNewBall(statusBall);
+
+
                         }
-                        //clock.restart();
-                        //addNewBall();
-                        //cout << "tiempo transcurrido" << timeElapsed1.asSeconds() << endl;
                     }
                 }
             }
@@ -502,7 +525,7 @@ void GameBreakout::run() {
 
 void GameBreakout::selectSurprise() {
 
-    int number = rand() % 6 + 1;
+    int number = rand() % 5 + 1;
     cout << "selectSurprise method" << endl;
     cout << to_string(number) << endl;
 
@@ -529,29 +552,21 @@ void GameBreakout::selectSurprise() {
     }
 }
 
-void GameBreakout::addNewBall(){
-    if(gameBallsList.size() < 5){
-        if(timeElapsed1 == t1) {
-            gameBallsList.push_back(ball);
-            Vector2f position = Vector2f(
-                    bar.getBar().getPosition().x + (bar.getBar().getSize().x / 2) -
-                    gameBallsList.back().getBall().getRadius(),
-                    bar.getBar().getPosition().y - bar.getBar().getSize().y);
-            gameBallsList.back().setPosition(position);
-            gameBallsList.back().angleMovement();
-            clock.restart();
-        }
+void GameBreakout::addNewBall(string statusBall){
+    if(statusBall == "newBall" and gameBallsList.size() < 4){
+        gameBallsList.push_back(ball);
+        Vector2f position = Vector2f(
+                bar.getBar().getPosition().x +(bar.getBar().getSize().x/2) - gameBallsList.back().getBall().getRadius(),
+                bar.getBar().getPosition().y - bar.getBar().getSize().y);
+        gameBallsList.back().setPosition(position);
+        gameBallsList.back().angleMovement();
     }
-
 }
 
-void GameBreakout::endGame() {
+void GameBreakout::checkWinOrLose() {
     if(gameBallsList.empty()){
-
+        gameCondition.setString("You lost! :(");
+    }else if(cantidadTotalBloques == 160 - cantidadDeProfundos and not gameBallsList.empty()){
+        gameCondition.setString("You win!!!");
     }
-
-}
-
-void GameBreakout::winGame() {
-
 }
